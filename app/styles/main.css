@@ -1,0 +1,23 @@
+body {
+    padding: 20px;
+}
+
+.card {
+  width: 7em;
+  height: 10.5em;
+  list-style: none;
+  margin: 0.5em;
+  display: inline-block;
+}
+
+.card span {
+  position: absolute;
+}
+
+.card.hidden {
+  background-color: gray;
+}
+
+.card.showing {
+  background-color: red;
+}

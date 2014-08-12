@@ -1,0 +1,12 @@
+{
+  "name": "memorizemaster",
+  "version": "0.0.0",
+  "dependencies": {
+    "font-awesome": "~4.1.0",
+    "underscore": "~1.6.0",
+    "angular": "~1.2.21"
+  },
+  "devDependencies": {
+    "font-awesome": "~4.1.0"
+  }
+}

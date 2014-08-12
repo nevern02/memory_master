@@ -1,0 +1,10 @@
+{
+    "appName": {
+        "message": "memorizemaster",
+        "description": "The name of the application"
+    },
+    "appDescription": {
+        "message": "A simple, Concentration-based game.",
+        "description": "The description of the application"
+    }
+}
