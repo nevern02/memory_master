@@ -1,4 +1,4 @@
-// Generated on 2014-08-11 using generator-chromeapp 0.2.12
+// Generated on 2014-08-23 using generator-chromeapp 0.2.12
 'use strict';
 
 // # Globbing

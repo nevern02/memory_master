@@ -15,30 +15,30 @@
         <!-- endbuild -->
     </head>
     <body ng-app="MemorizeMaster">
-    <div ng-controller="GameCtrl">
-      <ul>
-        <li class="card" 
-        ng-repeat="card in cards" 
-        ng-class="card.isShowing ? 'showing' : 'hidden'"
-        ng-click="reveal(card)">
-        <span ng-class="card.image" class="fa fa-5x" ng-show="card.isShowing"></span>
-        </li>
-      </ul>
-    </div>
+      <div ng-controller="GameCtrl">
+        <ul>
+          <li class="card" 
+          ng-repeat="card in cards" 
+          ng-class="card.isShowing ? 'showing' : 'hidden'" 
+          ng-click="reveal(card)">
+            <span ng-class="card.image" class="fa fa-5x" ng-show="card.isShowing"></span>
+          </li>
+        </ul>
+      </div>
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+      <!-- build:js scripts/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/underscore/underscore.js"></script>
+      <!-- endbower -->
+      <!-- endbuild -->
 
-    <!-- build:js scripts/index.js -->
-    <script src="scripts/index.js"></script>
-    <script src="scripts/memorizemaster.js"></script>
-    <script src="scripts/services/imagelist.js"></script>
-    <script src="scripts/services/card.js"></script>
-    <script src="scripts/controllers/game.js"></script>
-    <!-- endbuild -->
+      <!-- build:js scripts/index.js -->
+      <script src="scripts/index.js"></script>
+      <script src="scripts/memorizemaster.js"></script>
+      <script src="scripts/services/imagelist.js"></script>
+      <script src="scripts/services/card.js"></script>
+      <script src="scripts/controllers/game.js"></script>
+      <!-- endbuild -->
     </body>
 </html>
