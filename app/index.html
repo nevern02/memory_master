@@ -12,16 +12,17 @@
 
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/angular-csp.css">
         <!-- endbuild -->
     </head>
-    <body ng-app="MemorizeMaster">
+    <body ng-csp ng-app="MemorizeMaster">
       <div ng-controller="GameCtrl">
         <ul>
           <li class="card" 
           ng-repeat="card in cards" 
           ng-class="card.isShowing ? 'showing' : 'hidden'" 
           ng-click="reveal(card)">
-            <span ng-class="card.image" class="fa fa-5x" ng-show="card.isShowing"></span>
+          <span ng-class="card.image" class="fa fa-5x" ng-show="card.isShowing"></span>
           </li>
         </ul>
       </div>

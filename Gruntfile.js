@@ -258,6 +258,13 @@ module.exports = function (grunt) {
                         'styles/fonts/{,*/}*.*',
                         '_locales/{,*/}*.json',
                     ]
+                },
+                {
+                  expand: true,
+                  dot: true,
+                  cwd: '<%= config.app %>/bower_components/font-awesome',
+                  dest: '<%= config.dist %>',
+                  src: ['fonts/*.*']
                 }]
             },
             styles: {
