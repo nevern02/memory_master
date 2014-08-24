@@ -21,3 +21,8 @@ body {
 .card.showing {
   background-color: red;
 }
+
+#timer {
+  display: block;
+  text-align: center;
+}

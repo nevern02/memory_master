@@ -1,10 +1,15 @@
-MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "Card", "ImageList", function($scope, $timeout, Card, ImageList) {
+MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card", "ImageList", function($scope, $timeout, $interval, Card, ImageList) {
   var NUMBER_OF_CARDS = 20;
   var imageList = new ImageList(NUMBER_OF_CARDS / 2);
   var images = _.shuffle(imageList.images.concat(_.clone(imageList.images)));
   $scope.cards = [];
   $scope.currentPair = [];
   $scope.enableClick = true;
+  $scope.elapsedSeconds = 0;
+
+  $interval(function() {
+    $scope.elapsedSeconds += 1;
+  }, 1000);
 
   _.each(images, function(image) {
     $scope.cards.push(new Card(image));
