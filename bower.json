@@ -4,7 +4,8 @@
   "dependencies": {
     "font-awesome": "~4.1.0",
     "angular": "~1.2.5",
-    "underscore": "~1.6.0"
+    "underscore": "~1.6.0",
+    "normalize-css": "~3.0.1"
   },
   "devDependencies": {}
 }

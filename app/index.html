@@ -6,13 +6,15 @@
 
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
         <!-- endbower -->
         <!-- endbuild -->
 
         <!-- build:css styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/angular-csp.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/modal.css">
         <!-- endbuild -->
     </head>
     <body ng-csp ng-app="MemorizeMaster">
@@ -23,9 +25,13 @@
           ng-repeat="card in cards" 
           ng-class="card.isShowing ? 'showing' : 'hidden'" 
           ng-click="reveal(card)">
-          <span ng-class="card.image" class="fa fa-5x" ng-show="card.isShowing"></span>
+          <span ng-class="card.image" class="fa" ng-style="{color: card.currentColor()}"></span>
           </li>
         </ul>
+        <modal show='modalShown' width='25%' height='25%'>
+          <h1>Congratulations!</h1>
+          <h2>Completed the stage in {{elapsedSeconds | elapsedTime}}</h2>
+        </modal>
       </div>
 
       <!-- build:js scripts/vendor.js -->
@@ -36,8 +42,8 @@
       <!-- endbuild -->
 
       <!-- build:js scripts/index.js -->
-      <script src="scripts/index.js"></script>
       <script src="scripts/memorizemaster.js"></script>
+      <script src="scripts/directives/modal.js"></script>
       <script src="scripts/services/imagelist.js"></script>
       <script src="scripts/services/card.js"></script>
       <script src="scripts/filters/elapsedtime.js"></script>
