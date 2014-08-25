@@ -26,8 +26,18 @@ ul {
   background-color: white;
 }
 
+#hud h1 {
+  display: inline-block;
+}
+
 #timer {
-  display: block;
+  float: right;
+  display: inline-block;
+  text-align: right;
+}
+
+#stage {
+  display: inline-block;
   text-align: center;
 }
 
