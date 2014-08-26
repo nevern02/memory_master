@@ -1,28 +1,25 @@
 ul {
-  list-style: none;
-  padding: 0;
   text-align: center;
 }
 
 .card {
   border: thin solid black;
-  display: inline-block;
   margin: 1% 3%;
-  width: 12%;
+  width: 9em;
 }
 
 .card span {
-  font-size: 4em;
+  font-size: 6em;
   line-height: 2em;
   text-align: center;
   width: 100%;
 }
 
-.card.hidden {
+.card.back {
   background-color: black;
 }
 
-.card.showing {
+.card.front {
   background-color: white;
 }
 
@@ -31,8 +28,8 @@ ul {
 }
 
 #timer {
-  float: right;
   display: inline-block;
+  float: right;
   text-align: right;
 }
 

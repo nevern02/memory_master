@@ -1,11 +1,12 @@
 {
     "name": "__MSG_appName__",
     "description": "__MSG_appDescription__",
-    "version": "49",
+    "version": "61",
     "manifest_version": 2,
     "default_locale": "en",
     "permissions": [
         "app.window",
+        "storage",
         "<all_urls>"
     ],
     "icons": {

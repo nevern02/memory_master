@@ -8,6 +8,23 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card"
 
   $scope.stage = 1;
   $scope.bestScores = {};
+  if (chrome && chrome.storage) {
+    chrome.storage.sync.get('bestScores', function(data) {
+      if (data['bestScores']) {
+        $scope.bestScores = data['bestScores'];
+      }
+    });
+  }
+
+  var saveHighScore = function(stage, seconds) {
+    var current = $scope.bestScores[stage];
+    if (!current || seconds < current) {
+      $scope.bestScores[stage] = seconds;
+      if (chrome && chrome.storage) {
+        chrome.storage.sync.set({'bestScores': $scope.bestScores}, function() { });
+      }
+    }
+  }
 
   var initializeStage = function() {
     $scope.currentPair = [];
@@ -64,6 +81,7 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card"
         if (hasWon()) {
           $interval.cancel(timer);
           $scope.modalShown = true;
+          saveHighScore($scope.stage, $scope.elapsedSeconds);
         } else {
           $scope.currentPair = [];
           $scope.enableClick = true;
