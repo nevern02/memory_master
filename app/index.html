@@ -17,10 +17,13 @@
         <link rel="stylesheet" href="styles/angular-csp.css">
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/modal.css">
+        <link rel="stylesheet" href="styles/card-patterns.css">
         <!-- endbuild -->
     </head>
     <body ng-csp ng-app="MemorizeMaster">
-      <div class="container-fluid" ng-controller="GameCtrl">
+      <img class="background" id="background1" src="images/city1.jpg">
+      <img class="background" id="background2" src="images/grass1.jpg">
+      <div id="container" class="container-fluid" ng-controller="GameCtrl">
         <div class="row" id="hud">
           <h1 id="stage">Stage {{stage}}</h1>
           <div id=timer>
@@ -29,17 +32,23 @@
           </div>
         </div>
         <ul class="row list-inline list-unstyled">
-          <li class="card" 
+          <li class="card_container" 
           ng-repeat="card in cards" 
-          ng-class="card.isShowing ? 'front' : 'back'" 
+          ng-class="{flipped: card.isShowing}"
           ng-click="reveal(card)">
-          <span ng-class="card.image" class="fa" ng-style="{color: card.currentColor()}"></span>
+          <div class="card" ng-style="{'width': cardWidth(), 'height': cardHeight()}">
+            <div class="front face" ng-class="cardPattern()">
+            </div>
+            <div class="back face center" ng-style="{'font-size': iconWidth()}">
+              <span ng-class="card.image" class="fa" ng-style="{color: card.color}"></span>
+            </div>
+          </div>
           </li>
         </ul>
         <modal show='modalShown' width='40%'>
           <h1>Stage {{stage}} Complete!</h1>
           <h2>Completed in {{elapsedSeconds | elapsedTime}}</h2>
-          <button ng-click="nextStage()">Start Next Stage</button>
+          <button class="btn btn-success btn-lg" ng-click="nextStage()">Start Next Stage</button>
         </modal>
       </div>
 

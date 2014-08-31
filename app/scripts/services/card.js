@@ -5,13 +5,5 @@ MemorizeMaster.factory("Card", [function() {
     this.color = image.color;
   };
 
-  Card.prototype.currentColor = function() {
-    if (this.isShowing) {
-      return this.color;
-    } else {
-      return 'transparent';
-    }
-  }
-
   return Card;
 }]);
