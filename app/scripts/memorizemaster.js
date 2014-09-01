@@ -1,1 +1,1 @@
-var MemorizeMaster = angular.module("MemorizeMaster", []);
+var MemorizeMaster = angular.module("MemorizeMaster", ['ngAnimate']);

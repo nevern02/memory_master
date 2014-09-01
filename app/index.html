@@ -21,35 +21,39 @@
         <!-- endbuild -->
     </head>
     <body ng-csp ng-app="MemorizeMaster">
-      <img class="background" id="background1" src="images/city1.jpg">
-      <img class="background" id="background2" src="images/grass1.jpg">
-      <div id="container" class="container-fluid" ng-controller="GameCtrl">
-        <div class="row" id="hud">
-          <h1 id="stage">Stage {{stage}}</h1>
-          <div id=timer>
-            <h1>Time {{elapsedSeconds | elapsedTime}}</h1>
-            <h1 ng-show="bestScores[stage]">(Best: {{bestScores[stage] | elapsedTime}})</h1>
-          </div>
+      <div ng-controller="GameCtrl">
+        <div ng-controller="BackgroundCtrl">
+          <img class="background" id="background1" src="images/city1.jpg">
+          <img class="background" id="background2" src="images/grass1.jpg">
         </div>
-        <ul class="row list-inline list-unstyled">
-          <li class="card_container" 
-          ng-repeat="card in cards" 
-          ng-class="{flipped: card.isShowing}"
-          ng-click="reveal(card)">
-          <div class="card" ng-style="{'width': cardWidth(), 'height': cardHeight()}">
-            <div class="front face" ng-class="cardPattern()">
-            </div>
-            <div class="back face center" ng-style="{'font-size': iconWidth()}">
-              <span ng-class="card.image" class="fa" ng-style="{color: card.color}"></span>
+        <div id="container" class="container-fluid">
+          <h1 id="alert" ng-show="isAlerting">{{alert}}</h2>
+          <div class="row" id="hud">
+            <h1 id="stage">Stage {{stage}}</h1>
+            <div id=timer>
+              <h1>Time {{timer.currentSeconds | elapsedTime}}</h1>
             </div>
           </div>
-          </li>
-        </ul>
-        <modal show='modalShown' width='40%'>
-          <h1>Stage {{stage}} Complete!</h1>
-          <h2>Completed in {{elapsedSeconds | elapsedTime}}</h2>
-          <button class="btn btn-success btn-lg" ng-click="nextStage()">Start Next Stage</button>
-        </modal>
+          <ul class="row list-inline list-unstyled">
+            <li class="card_container" 
+            ng-repeat="card in cards" 
+            ng-class="{flipped: card.isShowing}"
+            ng-click="reveal(card)">
+            <div class="card" ng-style="{'width': card.width, 'height': card.height}">
+              <div class="front face" ng-class="card.pattern">
+              </div>
+              <div class="back face center" ng-style="{'font-size': card.fontSize}">
+                <span ng-class="card.image" class="fa" ng-style="{color: card.color}"></span>
+              </div>
+            </div>
+            </li>
+          </ul>
+          <modal show='modalShown' width='40%'>
+            <h1>Stage {{stage}} Complete!</h1>
+            <h2>Completed in {{elapsedSeconds | elapsedTime}}</h2>
+            <button class="btn btn-success btn-lg" ng-click="nextStage()">Start Next Stage</button>
+          </modal>
+        </div>
       </div>
 
       <!-- build:js scripts/vendor.js -->
@@ -58,6 +62,7 @@
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/underscore/underscore.js"></script>
       <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
       <!-- endbower -->
       <!-- endbuild -->
 
@@ -66,8 +71,11 @@
       <script src="scripts/directives/modal.js"></script>
       <script src="scripts/services/imagelist.js"></script>
       <script src="scripts/services/card.js"></script>
+      <script src="scripts/services/timer.js"></script>
+      <script src="scripts/services/highscores.js"></script>
       <script src="scripts/filters/elapsedtime.js"></script>
       <script src="scripts/controllers/game.js"></script>
+      <script src="scripts/controllers/background.js"></script>
       <!-- endbuild -->
     </body>
 </html>

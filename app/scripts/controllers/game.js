@@ -1,54 +1,20 @@
-MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card", "ImageList", function($scope, $timeout, $interval, Card, ImageList) {
-  var imageList = null;
-  var imageColorMap = null;
-  var images = null;
-  var timer = null;
+MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card", "Timer", function($scope, $timeout, $interval, Card, Timer) {
   var numberOfCards = 10;
-  var colors = ['red', 'green', 'blue', 'teal', 'orange', 'purple', 'brown', 'darkcyan', 'olive', 'tan', 'violet'];
-  var patterns = ['stairs', 'microbial', 'horizontal-stripes', 'rombes', 'arrows', 'zig-zag', 'weave', 'upholstery', 'stary', 'marrakesh', 'bokeh', 'carbon', 'vertical-stripes', 'carbon-fibre', 'hearts', 'argyle', 'steps', 'waves', 'cross', 'yin-yang', 'stars', 'brady-bunch', 'shippo', 'bricks', 'seigaiha', 'japanese-cube', 'polka-dot', 'houndstooth', 'checkerboard', 'diagonal-checkerboard', 'tartan', 'madras', 'lined-paper', 'blueprint-grid', 'tablecloth', 'diagonal-stripes', 'cicada-stripes'];
-  var backgrounds = ['city1.jpg', 'grass1.jpg', 'car1.jpg', 'buildings1.jpg', 'beach1.jpg', 'cherries1.jpg', 'water1.jpg', 'sunset1.jpg', 'car2.jpg', 'snow1.jpg', 'river1.jpg', 'sunset2.jpg', 'blossoms1.jpg', 'tree1.jpg', 'beach2.jpg', 'sunset3.jpg', 'street1.jpg', 'building1.jpg'];
+  var stageBeginSeconds = null;
 
+  $scope.timer = new Timer(10);
   $scope.stage = 1;
-  $scope.bestScores = {};
-  if (chrome && chrome.storage) {
-    chrome.storage.sync.get('bestScores', function(data) {
-      if (data['bestScores']) {
-        $scope.bestScores = data['bestScores'];
-      }
-    });
-  }
-
-  var saveHighScore = function(stage, seconds) {
-    var current = $scope.bestScores[stage];
-    if (!current || seconds < current) {
-      $scope.bestScores[stage] = seconds;
-      if (chrome && chrome.storage) {
-        chrome.storage.sync.set({'bestScores': $scope.bestScores}, function() { });
-      }
-    }
-  }
 
   var initializeStage = function() {
     $scope.currentPair = [];
     $scope.cards = [];
-    $scope.elapsedSeconds = 0;
-
-    imageList = new ImageList(numberOfCards / 2);
-    imageColorMap = _.map(imageList.images, function(image) {
-      var color = _.shuffle(colors).shift();
-      return {image: image, color: color};
-    });
-    images = _.shuffle(imageColorMap.concat(_.clone(imageColorMap)));
-
-    timer = $interval(function() {
-      $scope.elapsedSeconds += 1;
-    }, 1000);
-
-    _.each(images, function(image) {
-      $scope.cards.push(new Card(image));
-    });
-
+    stageBeginSeconds = $scope.timer.remaining();
+    $scope.cards = Card.newSet($scope.stage, numberOfCards);
     $scope.enableClick = true;
+
+    $scope.timer.start().then(function() {
+      $scope.modalShown = true;
+    });
   }
   initializeStage();
 
@@ -74,16 +40,25 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card"
     if ($scope.currentPair.length > 1) {
       $scope.enableClick = false;
       if ($scope.currentPair[0].image !== $scope.currentPair[1].image) {
+        if ($scope.currentPair[0].wasSeen && $scope.currentPair[1].wasSeen) {
+          $scope.alert = "+2s";
+          $scope.isAlerting = true;
+          $timeout(function() { $scope.isAlerting = false }, 10);
+          $scope.elapsedSeconds += 2;
+        }
         $timeout(function() {
-          _.each($scope.currentPair, function(card) { card.isShowing = false });
+          _.each($scope.currentPair, function(card) { 
+            card.isShowing = false 
+            card.wasSeen = true;
+          });
           $scope.currentPair = [];
           $scope.enableClick = true;
         }, 1000);
       } else {
         if (hasWon()) {
-          $interval.cancel(timer);
+          $scope.timer.stop();
           $scope.modalShown = true;
-          saveHighScore($scope.stage, $scope.elapsedSeconds);
+          saveHighScore($scope.stage, stageBeginSeconds - $scope.timer.currentSeconds);
         } else {
           $scope.currentPair = [];
           $scope.enableClick = true;
@@ -92,48 +67,4 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card"
     }
   }
 
-  $scope.cardWidth = function() {
-    return Math.max(9.5 - (0.5 * $scope.stage), 2) + "em";
-  }
-
-  $scope.iconWidth = function() {
-    return Math.max(6.5 - (0.5 * $scope.stage), 1) + "em";
-  }
-
-  $scope.cardHeight = function() {
-    return Math.max(12.5 - (0.5 * $scope.stage), 2) + "em";
-  }
-
-  $scope.cardPattern = function() {
-    var index = $scope.stage % patterns.length - 1;
-    if (index < 0) {
-      return patterns[patterns.length - 1];
-    } else {
-      return patterns[index];
-    }
-  }
-
-  $scope.backgroundImage = function() {
-    var index = $scope.stage % backgrounds.length - 1;
-    if (index < 0) {
-      return backgrounds[backgrounds.length - 1];
-    } else {
-      return backgrounds[index];
-    }
-  }
-
-  $scope.$watch('stage', function(newValue, oldValue) {
-    if (newValue === oldValue) {
-      return;
-    } 
-    var newBackground = 'images/' + $scope.backgroundImage();
-    var leaving = $scope.stage % 2 + 1;
-    var entering = (leaving === 1 ? 2 : 1);
-    $entering = $('#background' + entering);
-    $leaving = $('#background' + leaving);
-
-    $entering.attr('src', newBackground);
-    $entering.fadeIn(1000);
-    $leaving.fadeOut(1000);
-  });
 }]);
