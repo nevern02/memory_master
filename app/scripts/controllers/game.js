@@ -1,10 +1,28 @@
 'use strict'; 
 
-MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "Timer", function($scope, $timeout, $modal, Card, Timer) {
+MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "Timer", "HighScores", function($scope, $timeout, $modal, Card, Timer, HighScores) {
   $scope.numberOfCards = 10;
   $scope.timer = new Timer();
   $scope.stage = 1;
   $scope.state = 'welcome';
+  var startingSeconds = null;
+
+  $scope.$watch('state', function(newValue, oldValue) {
+    switch(newValue) {
+      case 'welcome':
+        welcomeState();
+        break;
+      case 'playing':
+        playingState();
+        break;
+      case 'summary':
+        summaryState();
+        break;
+      case 'prepare':
+        prepareState();
+        break;
+    }
+  });
 
   $scope.hasWon = function() {
     return !_.any($scope.cards, function(i) { return !i.isShowing });
@@ -49,7 +67,7 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
   var initializeStage = function() {
     $scope.currentPair = [];
     $scope.cards = [];
-    $scope.startingSeconds = $scope.timer.remaining();
+    startingSeconds = $scope.timer.remaining();
     $scope.cards = Card.newSet($scope.stage, $scope.numberOfCards);
     $scope.enableClick = true;
   }
@@ -75,6 +93,7 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
   var summaryState = function() {
     $scope.enableClick = false;
     $scope.timer.stop();
+    HighScores.save($scope.stage, startingSeconds - $scope.timer.remaining());
     $modal.open({
       templateUrl: 'summary.html',
       backdrop: 'static',
@@ -105,21 +124,4 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
       $scope.state = 'playing';
     });
   }
-
-  $scope.$watch('state', function(newValue, oldValue) {
-    switch(newValue) {
-      case 'welcome':
-        welcomeState();
-        break;
-      case 'playing':
-        playingState();
-        break;
-      case 'summary':
-        summaryState();
-        break;
-      case 'prepare':
-        prepareState();
-        break;
-    }
-  });
 }]);
