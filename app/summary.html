@@ -1,0 +1,11 @@
+<div class="modal-body">
+  <h1 class="text-center" ng-show="hasWon()">Stage {{stage}} Complete!</h1>
+  <h1 class="text-center" ng-show="!hasWon()">Game Over</h1>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary btn-lg" ng-click="dismiss()">Start Over</button>
+  <button type="button" 
+    class="btn btn-primary btn-lg" 
+    ng-click="nextStage()"
+    ng-show="hasWon()">Next Stage</button>
+</div>

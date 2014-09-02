@@ -1,32 +1,13 @@
-MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card", "Timer", function($scope, $timeout, $interval, Card, Timer) {
-  var numberOfCards = 10;
-  var stageBeginSeconds = null;
+'use strict'; 
 
-  $scope.timer = new Timer(10);
+MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "Timer", function($scope, $timeout, $modal, Card, Timer) {
+  $scope.numberOfCards = 10;
+  $scope.timer = new Timer();
   $scope.stage = 1;
+  $scope.state = 'welcome';
 
-  var initializeStage = function() {
-    $scope.currentPair = [];
-    $scope.cards = [];
-    stageBeginSeconds = $scope.timer.remaining();
-    $scope.cards = Card.newSet($scope.stage, numberOfCards);
-    $scope.enableClick = true;
-
-    $scope.timer.start().then(function() {
-      $scope.modalShown = true;
-    });
-  }
-  initializeStage();
-
-  var hasWon = function() {
+  $scope.hasWon = function() {
     return !_.any($scope.cards, function(i) { return !i.isShowing });
-  }
-
-  $scope.nextStage = function() {
-    $scope.stage += 1;
-    numberOfCards = Math.min(50, numberOfCards + 2);
-    initializeStage();
-    $scope.modalShown = false;
   }
 
   $scope.reveal = function(card) {
@@ -55,10 +36,8 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card"
           $scope.enableClick = true;
         }, 1000);
       } else {
-        if (hasWon()) {
-          $scope.timer.stop();
-          $scope.modalShown = true;
-          saveHighScore($scope.stage, stageBeginSeconds - $scope.timer.currentSeconds);
+        if ($scope.hasWon()) {
+          $scope.state = 'summary';
         } else {
           $scope.currentPair = [];
           $scope.enableClick = true;
@@ -67,4 +46,80 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$interval", "Card"
     }
   }
 
+  var initializeStage = function() {
+    $scope.currentPair = [];
+    $scope.cards = [];
+    $scope.startingSeconds = $scope.timer.remaining();
+    $scope.cards = Card.newSet($scope.stage, $scope.numberOfCards);
+    $scope.enableClick = true;
+  }
+
+  var welcomeState = function() {
+    $modal.open({
+      size: 'lg',
+      templateUrl: 'welcome.html',
+      backdrop: 'static',
+      controller: 'MenuCtrl'
+    }).result.then(function() {
+      $scope.timer.reset();
+      $scope.state = 'prepare';
+    });
+  }
+
+  var playingState = function() {
+    $scope.timer.start().then(function() {
+      $scope.state = 'summary';
+    });
+  }
+
+  var summaryState = function() {
+    $scope.enableClick = false;
+    $scope.timer.stop();
+    $modal.open({
+      templateUrl: 'summary.html',
+      backdrop: 'static',
+      controller: 'MenuCtrl',
+      scope: $scope
+    }).result.then(function(data) {
+      $scope.stage = data.newStage;
+      $scope.numberOfCards = data.cardCount;
+      initializeStage();
+      $scope.state = 'playing';
+    }, function () {
+      $scope.stage = 1;
+      $scope.numberOfCards = 10;
+      $scope.timer.reset();
+      initializeStage();
+      $scope.state = 'playing';
+    });
+  }
+
+  var prepareState = function() {
+    $modal.open({
+      templateUrl: 'prepare.html',
+      backdrop: 'static',
+      controller: 'MenuCtrl',
+      scope: $scope
+    }).result.then(function() {
+      initializeStage();
+      $scope.state = 'playing';
+    });
+  }
+
+  $scope.$watch('state', function(newValue, oldValue) {
+    switch(newValue) {
+      case 'welcome':
+        welcomeState();
+        break;
+      case 'playing':
+        playingState();
+        break;
+      case 'summary':
+        summaryState();
+        break;
+      case 'prepare':
+        prepareState();
+        break;
+    }
+  });
 }]);
