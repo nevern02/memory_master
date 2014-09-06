@@ -1,11 +1,9 @@
 'use strict'; 
 
-MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "Timer", "HighScores", function($scope, $timeout, $modal, Card, Timer, HighScores) {
+MemorizeMaster.controller("GameCtrl", ["$scope", "$rootScope", "$timeout", "$modal", "Card", "HighScores", function($scope, $rootScope, $timeout, $modal, Card, HighScores) {
   $scope.numberOfCards = 10;
-  $scope.timer = new Timer();
   $scope.stage = 1;
   $scope.state = 'welcome';
-  var startingSeconds = null;
 
   $scope.$watch('state', function(newValue, oldValue) {
     switch(newValue) {
@@ -24,6 +22,10 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
     }
   });
 
+  $scope.$on('timer.finish', function() {
+    $scope.state = 'summary';
+  });
+
   $scope.hasWon = function() {
     return !_.any($scope.cards, function(i) { return !i.isShowing });
   }
@@ -38,13 +40,8 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
 
     if ($scope.currentPair.length > 1) {
       $scope.enableClick = false;
-      if ($scope.currentPair[0].image !== $scope.currentPair[1].image) {
-        if ($scope.currentPair[0].wasSeen && $scope.currentPair[1].wasSeen) {
-          $scope.alert = "+2s";
-          $scope.isAlerting = true;
-          $timeout(function() { $scope.isAlerting = false }, 10);
-          $scope.elapsedSeconds += 2;
-        }
+      if (!matchingCards()) {
+        $rootScope.$broadcast('cards.miss', $scope.currentPair);
         $timeout(function() {
           _.each($scope.currentPair, function(card) { 
             card.isShowing = false 
@@ -54,6 +51,7 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
           $scope.enableClick = true;
         }, 1000);
       } else {
+        $rootScope.$broadcast('cards.match', $scope.currentPair);
         if ($scope.hasWon()) {
           $scope.state = 'summary';
         } else {
@@ -64,10 +62,25 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
     }
   }
 
+  $rootScope.$on('cards.miss', function(event, pair) {
+    if (pair[0].wasSeen && pair[1].wasSeen) {
+      alert('-2s');
+    }
+  });
+
+  var alert = function(text) {
+    $scope.alert = text;
+    $scope.isAlerting = true;
+    $timeout(function() { $scope.isAlerting = false }, 10);
+  }
+
+  var matchingCards = function() {
+    return $scope.currentPair[0].image === $scope.currentPair[1].image
+  }
+
   var initializeStage = function() {
     $scope.currentPair = [];
     $scope.cards = [];
-    startingSeconds = $scope.timer.remaining();
     $scope.cards = Card.newSet($scope.stage, $scope.numberOfCards);
     $scope.enableClick = true;
   }
@@ -79,21 +92,16 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
       backdrop: 'static',
       controller: 'MenuCtrl'
     }).result.then(function() {
-      $scope.timer.reset();
       $scope.state = 'prepare';
     });
   }
 
   var playingState = function() {
-    $scope.timer.start().then(function() {
-      $scope.state = 'summary';
-    });
   }
 
   var summaryState = function() {
     $scope.enableClick = false;
-    $scope.timer.stop();
-    HighScores.save($scope.stage, startingSeconds - $scope.timer.remaining());
+    //HighScores.save($scope.stage, startingSeconds - $scope.timer.remaining());
     $modal.open({
       templateUrl: 'summary.html',
       backdrop: 'static',
@@ -105,9 +113,9 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$timeout", "$modal", "Card", "
       initializeStage();
       $scope.state = 'playing';
     }, function () {
+      $scope.$broadcast('game.reset');
       $scope.stage = 1;
       $scope.numberOfCards = 10;
-      $scope.timer.reset();
       initializeStage();
       $scope.state = 'playing';
     });

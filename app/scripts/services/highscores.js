@@ -21,7 +21,7 @@ MemorizeMaster.service('HighScores', function() {
     if (!current || seconds < current) {
       scores[stage] = seconds;
       if (isChromeEnabled) {
-        chrome.storage.sync.set({'bestScores': $scope.bestScores}, function() { });
+        chrome.storage.sync.set({'bestScores': scores}, function() { });
       }
     }
   }

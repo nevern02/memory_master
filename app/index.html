@@ -29,12 +29,22 @@
         </div>
         <div id="container" class="container-fluid">
           <h1 id="alert" ng-show="isAlerting">{{alert}}</h2>
+
           <div class="row" id="hud">
-            <h1 id="stage">Stage {{stage}}</h1>
-            <div id=timer>
-              <h1>Time {{timer.currentSeconds | elapsedTime}}</h1>
+            <h1 id="stage" class="col-md-4">Stage {{stage}}</h1>
+
+            <div id=timer class="col-md-4 text-center" ng-controller="TimerCtrl">
+              <h1>Time {{currentSeconds | elapsedTime}}</h1>
+            </div>
+
+            <div id="score" class="col-md-4 text-right" ng-controller="ScoreCtrl">
+              <h1>Score {{score}}</h1>
+              <h3 id="multiplier">
+                <strong class="text-primary">x{{multiplier}}</strong>
+              </h3>
             </div>
           </div>
+
           <ul class="row list-inline list-unstyled">
             <li class="card_container" 
             ng-repeat="card in cards" 
@@ -67,12 +77,13 @@
       <script src="scripts/memorizemaster.js"></script>
       <script src="scripts/services/imagelist.js"></script>
       <script src="scripts/services/card.js"></script>
-      <script src="scripts/services/timer.js"></script>
       <script src="scripts/services/highscores.js"></script>
       <script src="scripts/filters/elapsedtime.js"></script>
       <script src="scripts/controllers/menu.js"></script>
       <script src="scripts/controllers/game.js"></script>
       <script src="scripts/controllers/background.js"></script>
+      <script src="scripts/controllers/score.js"></script>
+      <script src="scripts/controllers/timer.js"></script>
       <!-- endbuild -->
     </body>
 </html>

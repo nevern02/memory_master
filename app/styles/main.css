@@ -54,17 +54,6 @@ ul {
   font-weight: bold;
 }
 
-#timer {
-  display: inline-block;
-  float: right;
-  text-align: right;
-}
-
-#stage {
-  display: inline-block;
-  text-align: center;
-}
-
 #modal {
   background: white;
   position: absolute;
@@ -87,4 +76,12 @@ ul {
   top: 30%;
   transition:all linear 1.5s;
   -webkit-transition:all linear 1.5s;
+}
+
+#score #multiplier {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 9;
 }
