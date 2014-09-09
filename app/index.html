@@ -23,12 +23,22 @@
     </head>
     <body ng-csp ng-app="MemorizeMaster">
       <div ng-controller="GameCtrl">
+
         <div ng-controller="BackgroundCtrl">
           <img class="background" id="background1" src="images/city1.jpg">
           <img class="background" id="background2" src="images/grass1.jpg">
         </div>
+
         <div id="container" class="container-fluid">
-          <h1 id="alert" ng-show="isAlerting">{{alert}}</h2>
+
+          <div ng-controller="AlertCtrl">
+            <h1 class="alert" 
+                ng-repeat="alert in alerts"  
+                ng-show="alert.isShowing"
+                ng-style="{color: alert.color}">
+                {{alert.text}}
+            </h1>
+          </div>
 
           <div class="row" id="hud">
             <h1 id="stage" class="col-md-4">Stage {{stage}}</h1>
@@ -84,6 +94,7 @@
       <script src="scripts/controllers/background.js"></script>
       <script src="scripts/controllers/score.js"></script>
       <script src="scripts/controllers/timer.js"></script>
+      <script src="scripts/controllers/alert.js"></script>
       <!-- endbuild -->
     </body>
 </html>

@@ -4,6 +4,7 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$rootScope", "$timeout", "$mod
   $scope.numberOfCards = 10;
   $scope.stage = 1;
   $scope.state = 'welcome';
+  var matchHistory = [];
 
   $scope.$watch('state', function(newValue, oldValue) {
     switch(newValue) {
@@ -60,18 +61,6 @@ MemorizeMaster.controller("GameCtrl", ["$scope", "$rootScope", "$timeout", "$mod
         }
       }
     }
-  }
-
-  $rootScope.$on('cards.miss', function(event, pair) {
-    if (pair[0].wasSeen && pair[1].wasSeen) {
-      alert('-2s');
-    }
-  });
-
-  var alert = function(text) {
-    $scope.alert = text;
-    $scope.isAlerting = true;
-    $timeout(function() { $scope.isAlerting = false }, 10);
   }
 
   var matchingCards = function() {

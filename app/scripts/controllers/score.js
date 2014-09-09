@@ -5,7 +5,7 @@ MemorizeMaster.controller('ScoreCtrl', ['$scope', function($scope) {
   $scope.multiplier = 1;
   var history = [];
 
-  $scope.$on('match', function(pair) {
+  $scope.$on('cards.match', function() {
     $scope.score += 10 * $scope.multiplier;
 
     if (history[0]) {

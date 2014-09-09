@@ -61,8 +61,7 @@ ul {
   text-align: center;
 }
 
-#alert {
-  color: red;
+.alert {
   font-weight: bolder;
   font-size: 4em;
   left: 50%;
@@ -71,7 +70,7 @@ ul {
   position: absolute;
 }
 
-#alert.ng-hide {
+.alert.ng-hide {
   opacity: 0;
   top: 30%;
   transition:all linear 1.5s;
