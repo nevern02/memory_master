@@ -77,6 +77,10 @@ ul {
   -webkit-transition:all linear 1.5s;
 }
 
+#score {
+  padding-right: 2em;
+}
+
 #score #multiplier {
   display: inline-block;
   position: absolute;

@@ -1,24 +1,10 @@
 'use strict';
 
-MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  function($rootScope, $scope, $interval) {
+MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  '$state', function($rootScope, $scope, $interval, $state) {
   $scope.startingSeconds = 300;
   $scope.currentSeconds = $scope.startingSeconds;
   var promise = null;
   var history = [];
-
-  $scope.$watch('state', function(newValue) {
-    switch(newValue) {
-      case 'playing':
-        start();
-        break;
-      case 'welcome':
-        reset();
-        break;
-      case 'summary':
-        stop();
-        break;
-    }
-  });
 
   $scope.$on('cards.match', function() { 
     if (history[0]) {
@@ -36,6 +22,21 @@ MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  fu
     recordHistory(false);
   });
 
+  $scope.$on('$stateChangeSuccess', function(event, toState) {
+    switch (toState.name) {
+      case 'playing':
+        start();
+        break;
+      case 'stageComplete':
+      case 'gameOver':
+        stop();
+        break;
+      case 'welcome':
+        reset();
+        break;
+    }
+  });
+
   var recordHistory = function(match) {
     history.unshift(match);
 
@@ -49,10 +50,10 @@ MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  fu
 
     if ($scope.currentSeconds === 0) {
       stop();
-      $rootScope.$broadcast('timer.finish');
+      $state.go('gameOver');
     }
   }
-
+  
   var start = function() {
     promise = $interval(function() { tick(); }, 1000);
   }
@@ -64,5 +65,4 @@ MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  fu
   var reset = function() {
     $scope.currentSeconds = $scope.startingSeconds;
   }
-
 }]);

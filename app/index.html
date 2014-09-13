@@ -21,25 +21,16 @@
         <link rel="stylesheet" href="styles/menu.css">
         <!-- endbuild -->
     </head>
-    <body ng-csp ng-app="MemorizeMaster">
-      <div ng-controller="GameCtrl">
 
+    <body ng-csp ng-app="MemorizeMaster">
+
+      <div ng-controller="GameCtrl">
         <div ng-controller="BackgroundCtrl">
           <img class="background" id="background1" src="images/city1.jpg">
           <img class="background" id="background2" src="images/grass1.jpg">
         </div>
 
-        <div id="container" class="container-fluid">
-
-          <div ng-controller="AlertCtrl">
-            <h1 class="alert" 
-                ng-repeat="alert in alerts"  
-                ng-show="alert.isShowing"
-                ng-style="{color: alert.color}">
-                {{alert.text}}
-            </h1>
-          </div>
-
+        <div class="container-fluid">
           <div class="row" id="hud">
             <h1 id="stage" class="col-md-4">Stage {{stage}}</h1>
 
@@ -50,25 +41,14 @@
             <div id="score" class="col-md-4 text-right" ng-controller="ScoreCtrl">
               <h1>Score {{score}}</h1>
               <h3 id="multiplier">
-                <strong class="text-primary">x{{multiplier}}</strong>
+                <strong class="text-danger">
+                  x{{multiplier + stageMultiplier}}
+                </strong>
               </h3>
             </div>
           </div>
 
-          <ul class="row list-inline list-unstyled">
-            <li class="card_container" 
-            ng-repeat="card in cards" 
-            ng-class="{flipped: card.isShowing}"
-            ng-click="reveal(card)">
-            <div class="card" ng-style="{'width': card.width, 'height': card.height}">
-              <div class="front face" ng-class="card.pattern">
-              </div>
-              <div class="back face center" ng-style="{'font-size': card.fontSize}">
-                <span ng-class="card.image" class="fa" ng-style="{color: card.color}"></span>
-              </div>
-            </div>
-            </li>
-          </ul>
+          <section ui-view></section>
         </div>
       </div>
 
@@ -80,6 +60,7 @@
       <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
       <script src="bower_components/angular-animate/angular-animate.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <!-- endbower -->
       <!-- endbuild -->
 
@@ -95,6 +76,9 @@
       <script src="scripts/controllers/score.js"></script>
       <script src="scripts/controllers/timer.js"></script>
       <script src="scripts/controllers/alert.js"></script>
+      <script src="scripts/controllers/welcome.js"></script>
+      <script src="scripts/controllers/modal.js"></script>
+      <script src="scripts/controllers/playing.js"></script>
       <!-- endbuild -->
     </body>
 </html>

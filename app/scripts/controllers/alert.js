@@ -2,19 +2,22 @@
 
 MemorizeMaster.controller('AlertCtrl', ['$scope', '$timeout', function($scope, $timeout) {
   $scope.alerts = []
+  var count = 0;
 
   $scope.$on('alert', function(event, message, color) {
     var newAlert = {text: message, color: color, isShowing: true};
-    $scope.alerts.unshift(newAlert);
-    $timeout(function() { newAlert.isShowing = false; }, 10);
-    cleanup();
+    var time = count * 500;
+
+    $timeout(function() { 
+      $scope.alerts.unshift(newAlert) 
+    }, time);
+
+    count += 1; 
+
+    $timeout(function() { 
+      count -= 1 
+      newAlert.isShowing = false; 
+    }, time + 350);
   });
 
-  var cleanup = function() {
-    if ($scope.alerts.length > 50) {
-      $scope.alerts = _.reject($scope.alerts, function(alert) {
-        return alert.isShowing;
-      });
-    }
-  }
 }]);
