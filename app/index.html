@@ -39,10 +39,10 @@
             </div>
 
             <div id="score" class="col-md-4 text-right" ng-controller="ScoreCtrl">
-              <h1>Score {{getScore()}}</h1>
+              <h1>Score {{score}}</h1>
               <h3 id="multiplier">
                 <strong class="text-danger">
-                  x{{multiplier + stageMultiplier}}
+                  x{{multiplier}}
                 </strong>
               </h3>
             </div>
@@ -71,6 +71,7 @@
       <script src="scripts/services/highscores.js"></script>
       <script src="scripts/services/score.js"></script>
       <script src="scripts/services/timer.js"></script>
+      <script src="scripts/services/alert.js"></script>
       <script src="scripts/filters/elapsedtime.js"></script>
       <script src="scripts/controllers/menu.js"></script>
       <script src="scripts/controllers/game.js"></script>

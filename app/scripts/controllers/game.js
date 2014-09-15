@@ -9,7 +9,7 @@ MemorizeMaster.controller('GameCtrl', ['$scope', '$state', function($scope, $sta
     if (toState.name === 'prepare' && fromState.name === 'stageComplete') {
       $scope.stage += 1;
       $scope.numberOfCards += 2;
-    } else if (toState.name == 'welcome' && fromState.name == 'gameOver') {
+    } else if (toState.name == 'welcome') {
       $scope.stage = 1;
       $scope.numberOfCards = 10;
     }

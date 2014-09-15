@@ -1,23 +1,12 @@
 'use strict';
 
-MemorizeMaster.controller('AlertCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+MemorizeMaster.controller('AlertCtrl', ['$scope', 'Alert', function($scope, Alert) {
   $scope.alerts = []
-  var count = 0;
 
-  $scope.$on('alert', function(event, message, color) {
-    var newAlert = {text: message, color: color, isShowing: true};
-    var time = count * 500;
-
-    $timeout(function() { 
-      $scope.alerts.unshift(newAlert) 
-    }, time);
-
-    count += 1; 
-
-    $timeout(function() { 
-      count -= 1 
-      newAlert.isShowing = false; 
-    }, time + 350);
-  });
-
+  $scope.$watch(function() { return Alert.getAlerts().length },
+                function(newValue, oldValue) {
+                  if (newValue !== oldValue && newValue > oldValue) {
+                    $scope.alerts = Alert.getAlerts();
+                  }
+                });
 }]);

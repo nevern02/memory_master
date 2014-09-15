@@ -1,13 +1,13 @@
 'use strict';
 
-MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$state', 'Timer', function($rootScope, $scope, $state, Timer) {
+MemorizeMaster.controller('TimerCtrl', ['$scope', '$state', 'Timer', 'Alert', function($scope, $state, Timer, Alert) {
   $scope.remainingSeconds = Timer.remaining();
   var history = [];
 
   $scope.$on('cards.match', function() { 
     if (history[0]) {
       Timer.add(2);
-      $rootScope.$broadcast('alert', '+2s', 'green');
+      Alert.alert('+2s', 'green');
     }
     recordHistory(true) 
   });
@@ -15,7 +15,7 @@ MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$state', 'Timer
   $scope.$on('cards.miss', function(event, pair) {
     if (pair[0].wasSeen && pair[1].wasSeen) {
       Timer.subtract(2);
-      $rootScope.$broadcast('alert', '-2s', 'red');
+      Alert.alert('-2s', 'red');
     }
     recordHistory(false);
   });
