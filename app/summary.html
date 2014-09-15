@@ -1,6 +1,10 @@
-<div class="modal-body">
+<div class="modal-header">
   <h1 class="text-center" ng-if="winning">Stage {{stage}} Complete!</h1>
   <h1 class="text-center" ng-if="!winning">Game Over</h1>
+</div>
+<div class="text-center modal-body">
+  <h2>Time Remaining: {{getRemainingTime() | elapsedTime}}</h2>
+  <h2>Score: {{getScore()}}</h2>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary btn-lg" ng-click="dismiss()">Start Over</button>

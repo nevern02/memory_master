@@ -1,11 +1,19 @@
 MemorizeMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', function($scope, $state, $modal) {
-  var modalInstanceCtlr = function($scope, $modalInstance) {
+  var modalInstanceCtlr = function($scope, $modalInstance, Score, Timer) {
     $scope.close = function() {
       $modalInstance.close();
     }
 
     $scope.dismiss = function() {
       $modalInstance.dismiss();
+    }
+
+    $scope.getScore = function() {
+      return Score.getScore();
+    }
+
+    $scope.getRemainingTime = function() {
+      return Timer.remaining();
     }
   }
   var template = $state.current.name + '.html';

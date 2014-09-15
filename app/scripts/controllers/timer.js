@@ -1,14 +1,12 @@
 'use strict';
 
-MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  '$state', function($rootScope, $scope, $interval, $state) {
-  $scope.startingSeconds = 300;
-  $scope.currentSeconds = $scope.startingSeconds;
-  var promise = null;
+MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$state', 'Timer', function($rootScope, $scope, $state, Timer) {
+  $scope.remainingSeconds = Timer.remaining();
   var history = [];
 
   $scope.$on('cards.match', function() { 
     if (history[0]) {
-      $scope.currentSeconds += 2;
+      Timer.add(2);
       $rootScope.$broadcast('alert', '+2s', 'green');
     }
     recordHistory(true) 
@@ -16,7 +14,7 @@ MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  '$
 
   $scope.$on('cards.miss', function(event, pair) {
     if (pair[0].wasSeen && pair[1].wasSeen) {
-      $scope.currentSeconds -= 2;
+      Timer.subtract(2);
       $rootScope.$broadcast('alert', '-2s', 'red');
     }
     recordHistory(false);
@@ -25,14 +23,19 @@ MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  '$
   $scope.$on('$stateChangeSuccess', function(event, toState) {
     switch (toState.name) {
       case 'playing':
-        start();
+        Timer.start().then(
+          function() { $state.go('gameOver') },
+          null,
+          function(remaining) { $scope.remainingSeconds = remaining }
+        );
         break;
       case 'stageComplete':
       case 'gameOver':
-        stop();
+        Timer.stop();
         break;
       case 'welcome':
-        reset();
+        Timer.reset();
+        $scope.remainingSeconds = Timer.remaining();
         break;
     }
   });
@@ -43,26 +46,5 @@ MemorizeMaster.controller('TimerCtrl', ['$rootScope', '$scope', '$interval',  '$
     if (history.length > 50) {
       history.pop();
     }
-  }
-
-  var tick = function() {
-    $scope.currentSeconds -= 1;
-
-    if ($scope.currentSeconds === 0) {
-      stop();
-      $state.go('gameOver');
-    }
-  }
-  
-  var start = function() {
-    promise = $interval(function() { tick(); }, 1000);
-  }
-
-  var stop = function() {
-    $interval.cancel(promise);
-  }
-
-  var reset = function() {
-    $scope.currentSeconds = $scope.startingSeconds;
   }
 }]);

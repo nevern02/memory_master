@@ -1,13 +1,17 @@
 'use strict';
 
-MemorizeMaster.controller('ScoreCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
-  $scope.score = 0;
+MemorizeMaster.controller('ScoreCtrl', ['$scope', '$rootScope', 'Score', function($scope, $rootScope, Score) {
   $scope.multiplier = 1;
   $scope.stageMultiplier = 0;
   var history = [];
 
+  $scope.getScore = function() {
+    return Score.getScore();
+  }
+
   $scope.$on('cards.match', function() {
-    $scope.score += 10 * ($scope.multiplier + $scope.stageMultiplier);
+    var newScore = $scope.getScore() + 10 * ($scope.multiplier + $scope.stageMultiplier);
+    Score.setScore(newScore);
 
     if (history[0]) {
       $scope.multiplier += 1;
@@ -21,13 +25,13 @@ MemorizeMaster.controller('ScoreCtrl', ['$scope', '$rootScope', function($scope,
     recordHistory(false);
   });
 
-  $scope.$on('$stateChangeSuccess', function(event, toState) {
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState) {
     if (toState.name === 'welcome') {
-      $scope.score = 0;
+      Score.setScore(0);
       $scope.multiplier = 1;
       $scope.stageMultiplier = 0;
       history = [];
-    }
+    } 
   });
 
   $scope.$watch('stage', function(newValue, oldValue) {
@@ -49,9 +53,8 @@ MemorizeMaster.controller('ScoreCtrl', ['$scope', '$rootScope', function($scope,
   });
 
   var alert = function() {
-    var totalMultiplier = $scope.multiplier + $scope.stageMultiplier
-    if (totalMultiplier > 1) {
-      $rootScope.$broadcast('alert', 'x' + totalMultiplier, 'teal');
+    if ($scope.multiplier > 1) {
+      $rootScope.$broadcast('alert', 'x' + totalMultiplier(), 'teal');
     }
   }
 
@@ -61,6 +64,10 @@ MemorizeMaster.controller('ScoreCtrl', ['$scope', '$rootScope', function($scope,
     if (history.length > 50) {
       history.pop();
     }
+  }
+
+  var totalMultiplier = function() {
+    return $scope.multiplier + $scope.stageMultiplier;
   }
 }]);
 
