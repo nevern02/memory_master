@@ -1,6 +1,6 @@
 'use strict'; 
 
-MemorizeMaster.controller('GameCtrl', ['$scope', '$state', function($scope, $state) {
+MemorizeMaster.controller('GameCtrl', ['$scope', '$state', 'HighScores', function($scope, $state, HighScores) {
   $scope.numberOfCards = 10;
   $scope.stage = 1;
   $state.go('welcome');

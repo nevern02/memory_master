@@ -3,8 +3,9 @@
   <h1 class="text-center" ng-if="!winning">Game Over</h1>
 </div>
 <div class="text-center modal-body">
-  <h2>Time Remaining: {{getRemainingTime() | elapsedTime}}</h2>
-  <h2>Score: {{getScore()}}</h2>
+  <h2 ng-if="winning">Time Remaining: {{remainingTime | elapsedTime}}</h2>
+  <h2>Score: {{score}}</h2>
+  <h3 class="text-success" ng-show="newHighScore">(New High Score!)</h3>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary btn-lg" ng-click="dismiss()">Start Over</button>

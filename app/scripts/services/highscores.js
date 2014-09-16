@@ -1,28 +1,27 @@
 'use strict';
 
 MemorizeMaster.service('HighScores', function() {
-  var scores = {};
+  var highScore = null;
   var isChromeEnabled = chrome && chrome.storage
 
   if (isChromeEnabled) {
-    chrome.storage.sync.get('bestScores', function(data) {
-      if (data['bestScores']) {
-        scores = data['bestScores'];
+    chrome.storage.sync.get('highScore', function(data) {
+      if (data['highScore']) {
+        highScore = data['highScore'];
+      } else {
+        highScore = 0;
       }
     });
   }
 
-  this.get = function() {
-    return scores;
+  this.current = function() {
+    return highScore;
   }
 
-  this.save = function(stage, seconds) {
-    var current = scores[stage];
-    if (!current || seconds < current) {
-      scores[stage] = seconds;
-      if (isChromeEnabled) {
-        chrome.storage.sync.set({'bestScores': scores}, function() { });
-      }
+  this.save = function(score) {
+    if (highScore !== null && score > highScore && isChromeEnabled) {
+      highScore = score;
+      chrome.storage.sync.set({'highScore': score}, null);
     }
   }
 });
