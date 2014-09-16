@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.controller('TimerCtrl', ['$scope', '$state', 'Timer', 'Alert', function($scope, $state, Timer, Alert) {
+MemoryMaster.controller('TimerCtrl', ['$scope', '$state', 'Timer', 'Alert', function($scope, $state, Timer, Alert) {
   $scope.remainingSeconds = Timer.remaining();
   var history = [];
 

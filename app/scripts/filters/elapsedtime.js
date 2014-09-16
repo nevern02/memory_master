@@ -1,4 +1,4 @@
-MemorizeMaster.filter('elapsedTime', function() {
+MemoryMaster.filter('elapsedTime', function() {
   var formatNumber = function(number) {
     if (number < 10) {
       return "0" + number;

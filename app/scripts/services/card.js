@@ -1,4 +1,4 @@
-MemorizeMaster.factory('Card', ['ImageList', function(ImageList) {
+MemoryMaster.factory('Card', ['ImageList', function(ImageList) {
   var PATTERNS = ['stairs', 'microbial', 'horizontal-stripes', 'rombes', 'arrows', 
                   'zig-zag', 'weave', 'upholstery', 'stary', 'marrakesh', 'bokeh', 
                   'carbon', 'vertical-stripes', 'carbon-fibre', 'hearts', 'argyle', 

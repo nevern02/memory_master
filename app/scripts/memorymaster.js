@@ -1,6 +1,6 @@
-var MemorizeMaster = angular.module("MemorizeMaster", ['ngAnimate', 'ui.bootstrap', 'ui.router']);
+var MemoryMaster = angular.module("MemoryMaster", ['ngAnimate', 'ui.bootstrap', 'ui.router']);
 
-MemorizeMaster.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+MemoryMaster.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('welcome', {
     controller: 'ModalCtrl'
   }).state('prepare', {

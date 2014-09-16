@@ -1,4 +1,4 @@
-MemorizeMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', function($scope, $state, $modal) {
+MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', function($scope, $state, $modal) {
   var modalInstanceCtlr = function($scope, $modalInstance) {
     $scope.close = function() {
       $modalInstance.close();

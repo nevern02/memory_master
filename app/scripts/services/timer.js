@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.service('Timer', ['$interval', '$q', function($interval, $q) {
+MemoryMaster.service('Timer', ['$interval', '$q', function($interval, $q) {
   var startingSeconds = 300;
   var currentSeconds = startingSeconds;
   var promise = null;

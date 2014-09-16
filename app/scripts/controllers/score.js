@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.controller('ScoreCtrl', ['$scope', 'Score', 'Alert', function($scope, Score, Alert) {
+MemoryMaster.controller('ScoreCtrl', ['$scope', 'Score', 'Alert', function($scope, Score, Alert) {
   $scope.score = 0;
   $scope.multiplier = 1;
 

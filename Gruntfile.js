@@ -317,7 +317,7 @@ module.exports = function (grunt) {
                 options: {
                     archive: function() {
                         var manifest = grunt.file.readJSON('app/manifest.json');
-                        return 'package/memorizemaster-' + manifest.version + '.zip';
+                        return 'package/memorymaster-' + manifest.version + '.zip';
                     }
                 },
                 files: [{

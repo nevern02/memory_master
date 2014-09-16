@@ -1,4 +1,4 @@
-MemorizeMaster.service('Alert', ['$timeout', function($timeout) {
+MemoryMaster.service('Alert', ['$timeout', function($timeout) {
   var alerts = [];
   var count = 0;
 

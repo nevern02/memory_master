@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.factory('ImageList', function() {
+MemoryMaster.factory('ImageList', function() {
   var COLORS = ['red', 'green', 'blue', 'teal', 'orange', 'purple', 
                 'brown', 'darkcyan', 'olive', 'tan', 'violet'];
   var IMAGES = ['fa-adjust', 'fa-anchor', 'fa-archive', 'fa-arrows', 'fa-arrows-h', 'fa-arrows-v',

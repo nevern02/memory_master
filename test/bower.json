@@ -1,5 +1,5 @@
 {
-  "name": "memorizemaster",
+  "name": "memorymaster",
   "private": true,
   "dependencies": {
     "chai": "~1.8.0",

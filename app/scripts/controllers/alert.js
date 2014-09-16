@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.controller('AlertCtrl', ['$scope', 'Alert', function($scope, Alert) {
+MemoryMaster.controller('AlertCtrl', ['$scope', 'Alert', function($scope, Alert) {
   $scope.alerts = []
 
   $scope.$watch(function() { return Alert.getAlerts().length },

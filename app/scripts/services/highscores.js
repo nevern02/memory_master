@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.service('HighScores', function() {
+MemoryMaster.service('HighScores', function() {
   var highScore = null;
   var isChromeEnabled = chrome && chrome.storage
 

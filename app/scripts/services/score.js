@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.service('Score', ['Alert', function(Alert) {
+MemoryMaster.service('Score', ['Alert', function(Alert) {
   var score = 0;
   var multiplier = 1; 
   var stageMultiplier = 0;

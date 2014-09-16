@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.controller('PlayingCtrl', ['$scope', '$rootScope', '$state', '$timeout', 'Card', function($scope, $rootScope, $state, $timeout, Card) {
+MemoryMaster.controller('PlayingCtrl', ['$scope', '$rootScope', '$state', '$timeout', 'Card', function($scope, $rootScope, $state, $timeout, Card) {
   $scope.currentPair = [];
   $scope.cards = Card.newSet($scope.stage, $scope.numberOfCards);
   $scope.enableClick = true;

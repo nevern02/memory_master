@@ -1,6 +1,6 @@
 'use strict';
 
-MemorizeMaster.controller('BackgroundCtrl', ['$scope', function($scope) {
+MemoryMaster.controller('BackgroundCtrl', ['$scope', function($scope) {
   var BACKGROUNDS = ['city1.jpg', 'grass1.jpg', 'car1.jpg', 'buildings1.jpg', 'beach1.jpg', 
                      'cherries1.jpg', 'water1.jpg', 'sunset1.jpg', 'car2.jpg', 'snow1.jpg', 
                      'river1.jpg', 'sunset2.jpg', 'blossoms1.jpg', 'tree1.jpg', 'beach2.jpg', 
