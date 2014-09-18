@@ -4,6 +4,7 @@ MemoryMaster.controller('GameCtrl', ['$scope', '$state', 'HighScores', function(
   $scope.numberOfCards = 10;
   $scope.stage = 1;
   $state.go('welcome');
+  $scope.isBrowser = !window.location.protocol.match(/chrome-extension/);
 
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
     if (toState.name === 'prepare' && fromState.name === 'stageComplete') {
