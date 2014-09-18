@@ -1,18 +1,9 @@
 MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', function($scope, $state, $modal) {
-  var modalInstanceCtlr = function($scope, $modalInstance) {
-    $scope.close = function() {
-      $modalInstance.close();
-    }
-
-    $scope.dismiss = function() {
-      $modalInstance.dismiss();
-    }
-  }
   var template = $state.current.name + '.html';
   var commonOptions = {
     templateUrl: template, 
     backdrop: 'static', 
-    controller: modalInstanceCtlr, 
+    controller: 'ModalInstanceCtlr', 
     scope: $scope
   };
 
