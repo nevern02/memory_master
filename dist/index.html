@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width, initial-scale=1, user-scalable=no"><title>Memory Master</title><link rel=stylesheet href=styles/vendor.css><link rel=stylesheet href=styles/main.css><body ng-csp="" ng-app=MemoryMaster><div ng-controller=GameCtrl><div ng-controller=BackgroundCtrl><img class=background id=background1 src=images/city1.jpg> <img class=background id=background2 src=images/grass1.jpg></div><div class=container-fluid><div class=row id=hud><h1 id=stage class=col-md-4>Stage {{stage}}</h1><div id=timer class="col-md-4 text-center" ng-controller=TimerCtrl><h1>Time {{remainingSeconds | elapsedTime}}</h1></div><div id=score class="col-md-4 text-right" ng-controller=ScoreCtrl><h1>Score {{score}}</h1><h3 id=multiplier><strong class=text-danger>x{{multiplier}}</strong></h3></div></div><section ui-view=""></section>
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width, initial-scale=1, user-scalable=no"><title>Memory Master</title><link rel=stylesheet href=styles/vendor.css><link rel=stylesheet href=styles/main.css><body ng-csp="" ng-app=MemoryMaster><div ng-controller=GameCtrl><div ng-controller=BackgroundCtrl><img class=background id=background1 src=images/city1.jpg> <img class=background id=background2 src=images/grass1.jpg></div><div class=container-fluid><div class=row id=hud><h1 id=stage class=col-md-4>Stage {{stage}}</h1><div id=timer class="col-md-4 text-center" ng-controller=TimerCtrl><h1>Time {{remainingSeconds | elapsedTime}}</h1></div><div id=score class="col-md-4 text-right" ng-controller=ScoreCtrl><h1>Score {{score}}</h1><h3 id=multiplier><strong class=text-danger>x{{multiplier}}</strong></h3></div></div><section ui-view=""></section><!--
           <div id="ad" class="text-center" ng-if="isBrowser">
             <script async 
               src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
@@ -20,4 +20,4 @@
             ga('create', 'UA-38872336-5', 'auto');
               ga('send', 'pageview');
           </script>
-          </div></div><script src=scripts/vendor.js></script><script src=scripts/index.js></script>
+          --></div></div><script src=scripts/vendor.js></script><script src=scripts/index.js></script>
