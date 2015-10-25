@@ -1,6 +1,6 @@
 {
-  "name": "memorymaster",
-  "version": "0.0.0",
+  "name": "memory_master",
+  "version": "1.0.0",
   "dependencies": {
     "font-awesome": "~4.1.0",
     "angular": "~1.2.5",
@@ -11,8 +11,27 @@
     "angular-bootstrap": "~0.11.0",
     "angular-ui-router": "~0.2.11"
   },
-  "devDependencies": {},
   "resolutions": {
     "angular": ">=1"
-  }
+  },
+  "homepage": "http://www.blrice.net/memory_master",
+  "authors": [
+    "Brandon Rice <brandon@blrice.net>"
+  ],
+  "description": "A card matching game in the style of Concentration.",
+  "keywords": [
+    "game",
+    "concentration",
+    "card",
+    "game"
+  ],
+  "license": "GPL-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
 }
