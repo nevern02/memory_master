@@ -1,24 +1,95 @@
-<!DOCTYPE html><html><head>
-          <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <title>Memory Master</title>
 
-            ga('create', 'UA-38872336-5', 'auto');
-              ga('send', 'pageview');
-          </script>
-<meta charset=utf-8><meta name=viewport content="width=device-width, initial-scale=1, user-scalable=no"><title>Memory Master</title><link rel=stylesheet href=styles/vendor.css><link rel=stylesheet href=styles/main.css><body ng-csp="" ng-app=MemoryMaster><div ng-controller=GameCtrl><div ng-controller=BackgroundCtrl><img class=background id=background1 src=images/city1.jpg> <img class=background id=background2 src=images/grass1.jpg></div><div class=container-fluid><div class=row id=hud><h1 id=stage class=col-md-4>Stage {{stage}}</h1><div id=timer class="col-md-4 text-center" ng-controller=TimerCtrl><h1>Time {{remainingSeconds | elapsedTime}}</h1></div><div id=score class="col-md-4 text-right" ng-controller=ScoreCtrl><h1>Score {{score}}</h1><h3 id=multiplier><strong class=text-danger>x{{multiplier}}</strong></h3></div></div><section ui-view=""></section>
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+
+        <link rel="stylesheet" href="styles/angular-csp.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/card-patterns.css">
+    </head>
+
+    <body ng-csp ng-app="MemoryMaster">
+
+      <div ng-controller="GameCtrl">
+        <div ng-controller="BackgroundCtrl">
+          <img class="background" id="background1" src="images/city1.jpg">
+          <img class="background" id="background2" src="images/grass1.jpg">
+        </div>
+
+        <div class="container-fluid">
+          <div class="row" id="hud">
+            <h1 id="stage" class="col-md-4">Stage {{stage}}</h1>
+
+            <div id=timer class="col-md-4 text-center" ng-controller="TimerCtrl">
+              <h1>Time {{remainingSeconds | elapsedTime}}</h1>
+            </div>
+
+            <div id="score" class="col-md-4 text-right" ng-controller="ScoreCtrl">
+              <h1>Score {{score}}</h1>
+              <h3 id="multiplier">
+                <strong class="text-danger">
+                  x{{multiplier}}
+                </strong>
+              </h3>
+            </div>
+          </div>
+
+          <section ui-view></section>
+
+
           <div id="ad" class="text-center" ng-if="isBrowser">
-            <script async 
-              src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
-            </script>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <ins class="adsbygoogle"
-              style="display:inline-block;width:728px;height:90px"
-              data-ad-client="ca-pub-7513291640567922"
-              data-ad-slot="2776335698">
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-7513291640567922"
+                 data-ad-slot="2776335698">
             </ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
             <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script> 
-          </div></div><script src=scripts/vendor.js></script><script src=scripts/index.js></script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+              ga('create', 'UA-38872336-5', 'auto');
+              ga('send', 'pageview');
+            </script>
+          </div>
+
+
+        </div>
+      </div>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-animate.min.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+
+      <script src="scripts/memorymaster.js"></script>
+      <script src="scripts/services/imagelist.js"></script>
+      <script src="scripts/services/card.js"></script>
+      <script src="scripts/services/highscores.js"></script>
+      <script src="scripts/services/score.js"></script>
+      <script src="scripts/services/timer.js"></script>
+      <script src="scripts/services/alert.js"></script>
+      <script src="scripts/filters/elapsedtime.js"></script>
+      <script src="scripts/controllers/game.js"></script>
+      <script src="scripts/controllers/background.js"></script>
+      <script src="scripts/controllers/score.js"></script>
+      <script src="scripts/controllers/timer.js"></script>
+      <script src="scripts/controllers/alert.js"></script>
+      <script src="scripts/controllers/modal.js"></script>
+      <script src="scripts/controllers/playing.js"></script>
+      <script src="scripts/controllers/summary.js"></script>
+      <script src="scripts/controllers/modalinstance.js"></script>
+    </body>
+</html>
