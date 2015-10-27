@@ -4,22 +4,36 @@ module.exports = function(grunt) {
   var cdnjs = require('cdnjs-cdn-data');
   var merge = require('merge')
 
-  var underscore = {
+  var cdnSources = {
     underscore: {
       versions: ['1.6.0'],
       url: function (version) {
         return '//cdnjs.cloudflare.com/ajax/libs/underscore.js/' + version + '/underscore-min.js';
       }
+    },
+
+    bootstrap: {
+      versions: ['3.2.0'],
+      url: function (version) {
+        return '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + version + '/js/bootstrap.min.js';
+      }
+    },
+
+    'angular-bootstrap': {
+      versions: ['0.11.2'],
+      url: function (version) {
+        return '//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/' + version + '/ui-bootstrap-tpls.min.js';
+      }
     }
   }
 
-  var cdnData = merge(google, cdnjs, underscore);
+  var cdnData = merge(google, cdnjs, cdnSources);
 
   grunt.initConfig({
     copy: {
       release: {
         files: [
-          {expand: true, cwd: 'app/', src: ['**'], dest: 'dist/web'}
+          {expand: true, cwd: 'app/', src: ['**'], dest: 'dist/web/play'}
         ]
       }
     }, // copy
@@ -29,7 +43,7 @@ module.exports = function(grunt) {
         cdn: cdnData
       },
       dist: {
-        html: ['dist/web/index.html']
+        html: ['dist/web/play/index.html']
       }
     }, // cdnify
 
@@ -44,7 +58,7 @@ module.exports = function(grunt) {
           ]
         },
         files: [
-          {src: 'dist/web/index.html', dest: 'dist/web/index.html'}
+          {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'}
         ]
       }
     } // replace
