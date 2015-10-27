@@ -26,6 +26,13 @@
   },
   "homepage": "http://www.blrice.net/memory_master/",
   "devDependencies": {
-    "bower": "^1.6.5"
+    "bower": "^1.6.5",
+    "cdnjs-cdn-data": "^0.1.2",
+    "google-cdn-data": "^0.1.23",
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-google-cdn": "^0.4.3",
+    "grunt-replace": "^0.11.0",
+    "merge": "^1.2.0"
   }
 }

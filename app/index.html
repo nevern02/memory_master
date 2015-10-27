@@ -5,19 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <title>Memory Master</title>
 
-        <!-- build:css styles/vendor.css -->
-        <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-        <!-- endbower -->
-        <!-- endbuild -->
 
-        <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/angular-csp.css">
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/card-patterns.css">
-        <!-- endbuild -->
     </head>
 
     <body ng-csp ng-app="MemoryMaster">
@@ -47,35 +41,31 @@
           </div>
 
           <section ui-view></section>
-          <!--
-          <div id="ad" class="text-center" ng-if="isBrowser">
-            <script async 
-              src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
-            </script>
-            <ins class="adsbygoogle"
-              style="display:inline-block;width:728px;height:90px"
-              data-ad-client="ca-pub-7513291640567922"
-              data-ad-slot="2776335698">
-            </ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script> 
-          <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-            ga('create', 'UA-38872336-5', 'auto');
+          <!-- google-inline
+          <div id="ad" class="text-center" ng-if="isBrowser">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-7513291640567922"
+                 data-ad-slot="2776335698">
+            </ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+            <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+              ga('create', 'UA-38872336-5', 'auto');
               ga('send', 'pageview');
-          </script>
-          -->
+            </script>
           </div>
+          google-inline -->
+
         </div>
       </div>
 
-      <!-- build:js scripts/vendor.js -->
-      <!-- bower:js -->
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/underscore/underscore.js"></script>
@@ -83,10 +73,7 @@
       <script src="bower_components/angular-animate/angular-animate.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-      <!-- endbower -->
-      <!-- endbuild -->
 
-      <!-- build:js scripts/index.js -->
       <script src="scripts/memorymaster.js"></script>
       <script src="scripts/services/imagelist.js"></script>
       <script src="scripts/services/card.js"></script>
@@ -104,6 +91,5 @@
       <script src="scripts/controllers/playing.js"></script>
       <script src="scripts/controllers/summary.js"></script>
       <script src="scripts/controllers/modalinstance.js"></script>
-      <!-- endbuild -->
     </body>
 </html>
