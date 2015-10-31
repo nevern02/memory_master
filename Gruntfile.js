@@ -28,14 +28,13 @@ module.exports = function(grunt) {
   }
 
   var cdnData = merge(google, cdnjs, cdnSources);
+  var chromeScripts = ['app/scripts/chromereload.js', 'app/scripts/main.js'];
 
-  var filterChromeFiles = function(src) {
-    var chromeFiles = ['app/scripts/chromereload.js', 'app/scripts/main.js'];
-
-    if (chromeFiles.indexOf(src) === -1) {
-      return true;
-    } else {
+  var isGameScript = function(src) {
+    if (chromeScripts.indexOf(src) > -1) {
       return false;
+    } else {
+      return true;
     }
   }
 
@@ -43,7 +42,7 @@ module.exports = function(grunt) {
     copy: {
       release: {
         files: [
-          {expand: true, cwd: 'app/', src: ['**'], dest: 'dist/web/play'}
+          {expand: true, cwd: 'app/', src: ['*.html', 'images/**', 'styles/**'], dest: 'dist/web/play'}
         ]
       }
     }, // copy
@@ -109,10 +108,10 @@ module.exports = function(grunt) {
       },
       all: {
         files: [
-          {src: ['app/scripts/memorymaster.js', 'app/scripts/services/imagelist.js'], dest: 'dist/web/play/scripts.js'}
+          {src: ['app/scripts/memorymaster.js', 'app/scripts/**/*.js'], dest: 'dist/web/play/game.js', filter: isGameScript}
         ]
       }
-    }
+    } // uglify
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
