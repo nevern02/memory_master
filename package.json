@@ -31,6 +31,7 @@
     "google-cdn-data": "^0.1.23",
     "grunt": "^0.4.5",
     "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-uglify": "^0.10.0",
     "grunt-google-cdn": "^0.4.3",
     "grunt-replace": "^0.11.0",
     "merge": "^1.2.0"
