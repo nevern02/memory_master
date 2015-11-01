@@ -131,15 +131,23 @@ module.exports = function(grunt) {
           {src: ['app/scripts/memorymaster.js', 'app/scripts/**/*.js'], dest: 'dist/web/play/game.js', filter: isGameScript}
         ]
       }
-    } // uglify
+    }, // uglify
+
+    sitemap: {
+      dist: {
+        pattern: ['dist/web/index.html', 'dist/web/play/index.html'],
+        siteRoot: 'dist/web/'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-google-cdn');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-sitemap');
 
-  grunt.registerTask('build', ['copy', 'cdnify', 'replace', 'uglify']);
+  grunt.registerTask('build', ['copy', 'cdnify', 'replace', 'uglify', 'sitemap']);
 
   grunt.registerTask('default', ['build']);
 };
