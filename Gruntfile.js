@@ -99,6 +99,26 @@ module.exports = function(grunt) {
         files: [
           {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'}
         ]
+      }, // replace:css
+
+      scripts: {
+        options: {
+          patterns: [
+            {
+              match: /<script src="scripts\/.+<\/script>\n/g,
+              replacement: function(match) {
+                if (match.match(/memorymaster\.js/)) {
+                  return '<script src="game.js"></script>\n';
+                } else {
+                  return '';
+                }
+              }
+            }
+          ]
+        },
+        files: [
+          {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'}
+        ]
       }
     }, // replace
 
