@@ -40,9 +40,30 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     copy: {
-      release: {
+      web: {
         files: [
           {expand: true, cwd: 'app/', src: ['*.html', 'images/**', 'styles/**'], dest: 'dist/web/play'}
+        ]
+      },
+
+      chrome: {
+        files: [
+          {
+            expand: true,
+            cwd: 'app/',
+            src: [
+              'bower_components/**/*.min.{js,css}',
+              'bower_components/**/{normalize,underscore}.{css,js}',
+              'bower_components/font-awesome/fonts/*',
+              'bower_components/**/angular-animate.js' // minified version is broken in 1.2.28
+            ],
+            dest: 'dist/chrome'},
+          {
+            expand: true,
+            cwd: 'app/',
+            src: ['manifest.json', 'scripts/main.js', '*.html', 'images/**', 'styles/**'],
+            dest: 'dist/chrome'
+          }
         ]
       }
     }, // copy
@@ -69,7 +90,7 @@ module.exports = function(grunt) {
         files: [
           {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'}
         ]
-      },
+      }, // replace:google
 
       css: {
         options: {
@@ -101,6 +122,26 @@ module.exports = function(grunt) {
         ]
       }, // replace:css
 
+      bower: {
+        options: {
+          patterns: [
+            {
+              match: /("bower_components.+\/)(.+)\.(css|js)"/g,
+              replacement: function(match, p1, p2, p3) {
+                if (p2.match(/(normalize|underscore|angular-animate)/)) {
+                  return match;
+                } else {
+                  return p1 + p2 + '.min.' + p3 + '"';
+                }
+              }
+            }
+          ]
+        },
+        files: [
+          {src: 'dist/chrome/index.html', dest: 'dist/chrome/index.html'}
+        ]
+      }, // replace:bower
+
       scripts: {
         options: {
           patterns: [
@@ -117,20 +158,26 @@ module.exports = function(grunt) {
           ]
         },
         files: [
-          {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'}
+          {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'},
+          {src: 'dist/chrome/index.html', dest: 'dist/chrome/index.html'}
         ]
-      }
+      } // replace:scripts
     }, // replace
 
     uglify: {
       options: {
         mangle: false
       },
-      all: {
+      web: {
         files: [
           {src: ['app/scripts/memorymaster.js', 'app/scripts/**/*.js'], dest: 'dist/web/play/game.js', filter: isGameScript}
         ]
-      }
+      },
+      chrome: {
+        files: [
+          {src: ['app/scripts/memorymaster.js', 'app/scripts/**/*.js'], dest: 'dist/chrome/game.js', filter: isGameScript}
+        ]
+      },
     }, // uglify
 
     sitemap: {
@@ -147,7 +194,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-sitemap');
 
-  grunt.registerTask('build', ['copy', 'cdnify', 'replace', 'uglify', 'sitemap']);
+  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:google', 'replace:scripts', 'uglify:web', 'sitemap']);
+  grunt.registerTask('build:chrome', ['copy:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome']);
 
   grunt.registerTask('default', ['build']);
 };
