@@ -194,7 +194,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-sitemap');
 
-  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:google', 'replace:scripts', 'uglify:web', 'sitemap']);
+  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:google', 'replace:css', 'replace:scripts', 'uglify:web', 'sitemap']);
   grunt.registerTask('build:chrome', ['copy:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome']);
 
   grunt.registerTask('default', ['build']);
