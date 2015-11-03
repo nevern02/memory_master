@@ -185,6 +185,14 @@ module.exports = function(grunt) {
         pattern: ['dist/web/index.html', 'dist/web/play/index.html'],
         siteRoot: 'dist/web/'
       }
+    }, // sitemap
+
+    zip: {
+      chrome: {
+        cwd: 'dist/chrome',
+        src: ['dist/chrome/**', '!dist/chrome/*.zip'],
+        dest: 'dist/chrome/memorymaster.zip'
+      }
     }
   });
 
@@ -193,9 +201,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-sitemap');
+  grunt.loadNpmTasks('grunt-zip');
 
   grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:google', 'replace:css', 'replace:scripts', 'uglify:web', 'sitemap']);
-  grunt.registerTask('build:chrome', ['copy:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome']);
+  grunt.registerTask('build:chrome', ['copy:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome', 'zip:chrome']);
 
   grunt.registerTask('default', ['build']);
 };

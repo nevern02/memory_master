@@ -35,6 +35,7 @@
     "grunt-google-cdn": "^0.4.3",
     "grunt-replace": "^0.11.0",
     "grunt-sitemap": "^1.2.1",
+    "grunt-zip": "^0.17.1",
     "merge": "^1.2.0"
   }
 }
