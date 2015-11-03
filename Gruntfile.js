@@ -78,17 +78,18 @@ module.exports = function(grunt) {
     }, // cdnify
 
     replace: {
-      adsense: {
+      google: {
         options: {
           patterns: [
             {
-              match: /.*google-adsense.*/g,
+              match: /.*google-inline.*/g,
               replacement: ''
             }
           ]
         },
         files: [
-          {src: 'dist/web/play/prepare.html', dest: 'dist/web/play/prepare.html'}
+          {src: 'dist/web/play/prepare.html', dest: 'dist/web/play/prepare.html'},
+          {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'},
         ]
       }, // replace:google
 
@@ -203,7 +204,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sitemap');
   grunt.loadNpmTasks('grunt-zip');
 
-  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:adsense', 'replace:css', 'replace:scripts', 'uglify:web', 'sitemap']);
+  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:google', 'replace:css', 'replace:scripts', 'uglify:web', 'sitemap']);
   grunt.registerTask('build:chrome', ['copy:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome', 'zip:chrome']);
   grunt.registerTask('build', ['build:web', 'build:chrome']);
 
