@@ -205,6 +205,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:google', 'replace:css', 'replace:scripts', 'uglify:web', 'sitemap']);
   grunt.registerTask('build:chrome', ['copy:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome', 'zip:chrome']);
+  grunt.registerTask('build', ['build:web', 'build:chrome']);
 
   grunt.registerTask('default', ['build']);
 };
