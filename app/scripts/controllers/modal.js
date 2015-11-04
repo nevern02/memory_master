@@ -24,13 +24,15 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', 'Analytics',
       });
       break;
     case 'stageComplete':
-      Analytics.sendView('stageComplete');
-      Analytics.sendEvent('stageComplete', $scope.stage);
-
       $scope.winning = true;
     case 'gameOver':
-      Analytics.sendView('gameOver');
-      Analytics.sendEvent('gameOver', $scope.score);
+      if ($scope.winning) {
+        Analytics.sendView('stageComplete');
+        Analytics.sendEvent('stageComplete', $scope.stage);
+      } else {
+        Analytics.sendView('gameOver');
+        Analytics.sendEvent('gameOver', $scope.score);
+      }
 
       $scope.winning = $scope.winning || false;
       var customOptions = {controller: 'SummaryCtrl', templateUrl: 'summary.html'};

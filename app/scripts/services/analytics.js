@@ -22,9 +22,9 @@ MemoryMaster.service('Analytics', function() {
 
   this.sendEvent = function(action, value) {
     if (isBrowser) {
-      webTracker && ('send', 'event', 'Game', action, null, value);
+      webTracker && ('send', 'event', 'Game', action, 'default', value);
     } else {
-      appTracker && appTracker.sendEvent('Game', action, null, value);
+      appTracker && appTracker.sendEvent('Game', action, 'default', value);
     }
   }
 });
