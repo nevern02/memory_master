@@ -22,7 +22,7 @@ MemoryMaster.service('Analytics', function() {
 
   this.sendEvent = function(action, value) {
     if (isBrowser) {
-      webTracker && ('send', 'event', 'Game', action, 'default', value);
+      webTracker && webTracker('send', 'event', 'Game', action, 'default', value);
     } else {
       appTracker && appTracker.sendEvent('Game', action, 'default', value);
     }
