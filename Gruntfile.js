@@ -78,11 +78,11 @@ module.exports = function(grunt) {
     }, // cdnify
 
     replace: {
-      google: {
+      web: {
         options: {
           patterns: [
             {
-              match: /.*google-inline.*/g,
+              match: /.*google-web.*/g,
               replacement: ''
             }
           ]
@@ -91,7 +91,21 @@ module.exports = function(grunt) {
           {src: 'dist/web/play/prepare.html', dest: 'dist/web/play/prepare.html'},
           {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'},
         ]
-      }, // replace:google
+      }, // replace:web
+
+      chrome: {
+        options: {
+          patterns: [
+            {
+              match: /.*google-chrome.*/g,
+              replacement: ''
+            }
+          ]
+        },
+        files: [
+          {src: 'dist/chrome/index.html', dest: 'dist/chrome/index.html'},
+        ]
+      }, // replace:chrome
 
       css: {
         options: {
@@ -204,8 +218,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sitemap');
   grunt.loadNpmTasks('grunt-zip');
 
-  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:google', 'replace:css', 'replace:scripts', 'uglify:web', 'sitemap']);
-  grunt.registerTask('build:chrome', ['copy:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome', 'zip:chrome']);
+  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:web', 'replace:css', 'replace:scripts', 'uglify:web', 'sitemap']);
+  grunt.registerTask('build:chrome', ['copy:chrome', 'replace:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome', 'zip:chrome']);
   grunt.registerTask('build', ['build:web', 'build:chrome']);
 
   grunt.registerTask('default', ['build']);

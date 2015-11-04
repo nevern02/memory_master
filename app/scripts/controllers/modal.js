@@ -1,4 +1,4 @@
-MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', function($scope, $state, $modal) {
+MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', 'Analytics', function($scope, $state, $modal, Analytics) {
   var template = $state.current.name + '.html';
   var commonOptions = {
     templateUrl: template, 
@@ -9,6 +9,8 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', function($sc
 
   switch($state.current.name) {
     case 'welcome':
+      Analytics.sendView('welcome');
+
       var customOptions = {size: 'lg'};
       $modal.open(
         $.extend({}, customOptions, commonOptions)
@@ -22,8 +24,14 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', function($sc
       });
       break;
     case 'stageComplete':
+      Analytics.sendView('stageComplete');
+      Analytics.sendEvent('stageComplete', $scope.stage);
+
       $scope.winning = true;
     case 'gameOver':
+      Analytics.sendView('gameOver');
+      Analytics.sendEvent('gameOver', $scope.score);
+
       $scope.winning = $scope.winning || false;
       var customOptions = {controller: 'SummaryCtrl', templateUrl: 'summary.html'};
       $modal.open(
