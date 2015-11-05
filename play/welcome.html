@@ -20,5 +20,12 @@
     </div>
   </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary btn-lg" ng-click="close()">Start Playing!</button>
+  <form class="form-inline">
+    <div class="checkbox" ng-show="!isBrowser">
+      <label>
+        <input type="checkbox" ng-model="allowTracking"> Allow anonymous usage statistics
+      </label>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg" ng-click="close()">Start Playing!</button>
+  </form>
 </div>
