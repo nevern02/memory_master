@@ -1,7 +1,8 @@
 MemoryMaster.service('Analytics', function() {
   var isBrowser = !window.location.protocol.match(/chrome-extension/);
-  var appService = null
+  var appConfig = null
   var appTracker = null
+  var isEnabled = true
   var webTracker = null
 
   if (typeof(ga) != 'undefined') {
@@ -10,8 +11,17 @@ MemoryMaster.service('Analytics', function() {
       webTracker = tracker;
     });
   } else if (!isBrowser) {
-    appService = analytics.getService('memory_master');
-    appTracker = appService.getTracker('UA-38872336-6');
+    var service = analytics.getService('memory_master');
+    appTracker = service.getTracker('UA-38872336-6');
+
+    service.getConfig().addCallback(function(config) {
+      appConfig = config;
+      isEnabled = appConfig.isTrackingPermitted();
+    });
+  }
+
+  this.isEnabled = function() {
+    return isEnabled;
   }
 
   this.sendView = function(name) {
@@ -28,6 +38,15 @@ MemoryMaster.service('Analytics', function() {
       webTracker && webTracker.send('event', 'Game', action, 'default', value);
     } else {
       appTracker && appTracker.sendEvent('Game', action, 'default', value);
+    }
+  }
+
+  this.setEnabled = function(value) {
+    if (isBrowser) {
+      return true;
+    } else {
+      isEnabled = value;
+      return appConfig.setTrackingPermitted(isEnabled);
     }
   }
 });
