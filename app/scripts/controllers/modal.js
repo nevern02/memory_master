@@ -20,6 +20,7 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', 'Analytics',
       break;
     case 'prepare':
       $modal.open(commonOptions).result.then(function() {
+        Analytics.sendView('playing');
         $state.go('playing');
       });
       break;
@@ -27,7 +28,6 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', 'Analytics',
       $scope.winning = true;
     case 'gameOver':
       if ($scope.winning) {
-        Analytics.sendView('stageComplete');
         Analytics.sendEvent('stageComplete', $scope.stage);
       } else {
         Analytics.sendView('gameOver');
