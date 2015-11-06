@@ -28,7 +28,9 @@
     </head>
 
     <body ng-csp ng-app="MemoryMaster">
-
+      <div id="loading" ng-show="false">
+        <h1>Loading...</h1>
+      </div>
       <div ng-controller="GameCtrl">
         <div ng-controller="BackgroundCtrl">
           <img class="background" id="background1" src="images/city1.jpg">
