@@ -14,3 +14,5 @@ MemoryMaster.config(['$stateProvider', '$urlRouterProvider', function($stateProv
     controller: 'ModalCtrl'
   });;
 }]);
+
+$('body').onload = $('#loading').hide();
