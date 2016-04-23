@@ -1,18 +1,19 @@
 MemoryMaster.service('Analytics', function() {
-  var isBrowser = !window.location.protocol.match(/chrome-extension/);
-  var appConfig = null
-  var appTracker = null
-  var isEnabled = true
-  var webTracker = null
+  var propertyNumber = 'UA-38872336-6'
+  var isBrowser      = !window.location.protocol.match(/chrome-extension/);
+  var appConfig      = null
+  var appTracker     = null
+  var isEnabled      = true
+  var webTracker     = null
 
   if (typeof(ga) !== 'undefined') {
-    ga('create', 'UA-38872336-6', 'auto');
+    ga('create', propertyNumber, 'auto');
     ga(function(tracker) {
       webTracker = tracker;
     });
   } else if (!isBrowser) {
     var service = analytics.getService('memory_master');
-    appTracker = service.getTracker('UA-38872336-6');
+    appTracker = service.getTracker(propertyNumber);
 
     service.getConfig().addCallback(function(config) {
       appConfig = config;
