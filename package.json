@@ -26,7 +26,7 @@
   },
   "homepage": "http://www.blrice.net/memory_master/",
   "devDependencies": {
-    "bower": "^1.6.5",
+    "bower": "^1.7.9",
     "cdnjs-cdn-data": "^0.1.2",
     "google-cdn-data": "^0.1.23",
     "grunt": "^0.4.5",

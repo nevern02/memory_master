@@ -2,13 +2,13 @@
 
 MemoryMaster.service('HighScores', function() {
   var highScore = 0;
-  var isChromeEnabled = chrome && chrome.storage
+  var isChromeEnabled = typeof chrome !== 'undefined' && chrome.storage
 
   if (isChromeEnabled) {
     chrome.storage.sync.get('highScore', function(data) {
       if (data['highScore']) {
         highScore = data['highScore'];
-      } 
+      }
     });
   } else {
     var cookie = document.cookie.replace(/(?:(?:^|.*;\s*)highScore\s*\=\s*([^;]*).*$)|^.*$/, "$1");
