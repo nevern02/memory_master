@@ -1,6 +1,6 @@
 'use strict';
 
-MemoryMaster.controller('SummaryCtrl', ['$scope', '$modalInstance', 'Score', 'HighScores', 'Timer', function($scope, $modalInstance, Score, HighScores, Timer) {
+MemoryMaster.controller('SummaryCtrl', ['$scope', '$uibModalInstance', 'Score', 'HighScores', 'Timer', function($scope, $modalInstance, Score, HighScores, Timer) {
   $scope.score = Score.getScore();
   $scope.remainingTime = Timer.remaining();
   $scope.highScore = HighScores.current();

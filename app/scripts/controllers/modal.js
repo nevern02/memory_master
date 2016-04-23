@@ -1,4 +1,4 @@
-MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$modal', 'Analytics', function($scope, $state, $modal, Analytics) {
+MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytics', function($scope, $state, $modal, Analytics) {
   var template = $state.current.name + '.html';
   var commonOptions = {
     templateUrl: template, 
