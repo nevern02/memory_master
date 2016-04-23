@@ -5,8 +5,8 @@ MemoryMaster.service('Analytics', function() {
   var isEnabled = true
   var webTracker = null
 
-  if (typeof(ga) != 'undefined') {
-    ga('create', 'UA-38872336-5', 'auto');
+  if (typeof(ga) !== 'undefined') {
+    ga('create', 'UA-38872336-6', 'auto');
     ga(function(tracker) {
       webTracker = tracker;
     });
@@ -28,16 +28,16 @@ MemoryMaster.service('Analytics', function() {
     if (isBrowser && webTracker) {
       webTracker.set('page', '/' + name);
       webTracker.send('pageview');
-    } else {
-      appTracker && appTracker.sendAppView(name);
+    } else if (appTracker) {
+      appTracker.sendAppView(name);
     }
   }
 
   this.sendEvent = function(action, value) {
     if (isBrowser) {
-      webTracker && webTracker.send('event', 'Game', action, 'default', value);
+      webTracker && webTracker.send('event', 'Game', action, 'web', value);
     } else {
-      appTracker && appTracker.sendEvent('Game', action, 'default', value);
+      appTracker && appTracker.sendEvent('Game', action, 'chrome', value);
     }
   }
 
