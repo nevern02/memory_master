@@ -2,7 +2,7 @@
 
 MemoryMaster.service('HighScores', function() {
   var highScore = 0;
-  var isChromeEnabled = typeof chrome !== 'undefined' && chrome.storage
+  var isChromeEnabled = typeof(chrome) !== 'undefined' && chrome.storage
 
   if (isChromeEnabled) {
     chrome.storage.sync.get('highScore', function(data) {
