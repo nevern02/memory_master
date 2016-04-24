@@ -39,13 +39,15 @@
 
         <div class="container-fluid">
           <div class="row" id="hud">
-            <h1 id="stage" class="col-md-4">Stage {{stage}}</h1>
+            <div id=stage class="col-md-4 col-sm-12 text-center">
+              <h1>Stage {{stage}}</h1>
+            </div>
 
-            <div id=timer class="col-md-4 text-center" ng-controller="TimerCtrl">
+            <div id=timer class="col-md-4 col-sm-12 text-center" ng-controller="TimerCtrl">
               <h1>Time {{remainingSeconds | elapsedTime}}</h1>
             </div>
 
-            <div id="score" class="col-md-4 text-right" ng-controller="ScoreCtrl">
+            <div id="score" class="col-md-4 col-sm-12 text-center" ng-controller="ScoreCtrl">
               <h1>Score {{score}}</h1>
               <h3 id="multiplier">
                 <strong class="text-danger">

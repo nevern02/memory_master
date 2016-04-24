@@ -18,8 +18,8 @@ MemoryMaster.controller('PlayingCtrl', ['$scope', '$rootScope', '$state', '$time
       if (!matchingCards()) {
         $rootScope.$broadcast('cards.miss', $scope.currentPair);
         $timeout(function() {
-          _.each($scope.currentPair, function(card) { 
-            card.isShowing = false 
+          _.each($scope.currentPair, function(card) {
+            card.isShowing = false
             card.wasSeen = true;
           });
           $scope.currentPair = [];
