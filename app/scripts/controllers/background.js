@@ -1,9 +1,9 @@
 'use strict';
 
 MemoryMaster.controller('BackgroundCtrl', ['$scope', function($scope) {
-  var BACKGROUNDS = ['city1.jpg', 'grass1.jpg', 'car1.jpg', 'buildings1.jpg', 'beach1.jpg', 
-                     'cherries1.jpg', 'water1.jpg', 'sunset1.jpg', 'car2.jpg', 'snow1.jpg', 
-                     'river1.jpg', 'sunset2.jpg', 'blossoms1.jpg', 'tree1.jpg', 'beach2.jpg', 
+  var BACKGROUNDS = ['city1.jpg', 'grass1.jpg', 'car1.jpg', 'buildings1.jpg', 'beach1.jpg',
+                     'cherries1.jpg', 'water1.jpg', 'sunset1.jpg', 'car2.jpg', 'snow1.jpg',
+                     'river1.jpg', 'sunset2.jpg', 'blossoms1.jpg', 'tree1.jpg', 'beach2.jpg',
                      'sunset3.jpg', 'street1.jpg', 'building1.jpg'];
 
   var nextBackground = function() {
@@ -18,7 +18,7 @@ MemoryMaster.controller('BackgroundCtrl', ['$scope', function($scope) {
   $scope.$watch('stage', function(newValue, oldValue) {
     if (newValue === oldValue) {
       return; // in case we're initializing
-    } 
+    }
 
     var newBackground = 'images/' + nextBackground();
     var leaving = $scope.stage % 2 + 1;

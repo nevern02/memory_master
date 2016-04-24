@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict';
 
 MemoryMaster.controller('GameCtrl', ['$scope', '$state', 'HighScores', function($scope, $state, HighScores) {
   $scope.numberOfCards = 10;
@@ -9,10 +9,10 @@ MemoryMaster.controller('GameCtrl', ['$scope', '$state', 'HighScores', function(
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
     if (toState.name === 'prepare' && fromState.name === 'stageComplete') {
       $scope.stage += 1;
-      $scope.numberOfCards += 2;
+      $scope.numberOfCards = Math.max($scope.numberOfcards + 2, 20);
     } else if (toState.name == 'welcome') {
       $scope.stage = 1;
-      $scope.numberOfCards = 10;
+      $scope.numberOfCards = 20;
     }
   });
 }]);
