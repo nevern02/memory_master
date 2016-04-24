@@ -124,6 +124,7 @@ module.exports = function(grunt) {
         },
         files: [
           {src: 'dist/web/play/prepare.html', dest: 'dist/web/play/prepare.html'},
+          {src: 'dist/web/play/summary.html', dest: 'dist/web/play/summary.html'},
           {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'},
         ]
       }, // replace:web
@@ -139,6 +140,8 @@ module.exports = function(grunt) {
         },
         files: [
           {src: 'dist/chrome/index.html', dest: 'dist/chrome/index.html'},
+          {src: 'dist/chrome/prepare.html', dest: 'dist/chrome/prepare.html'},
+          {src: 'dist/chrome/summary.html', dest: 'dist/chrome/summary.html'},
         ]
       }, // replace:chrome
 

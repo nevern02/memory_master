@@ -1,9 +1,10 @@
 MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytics', function($scope, $state, $modal, Analytics) {
-  var template = $state.current.name + '.html';
+  var affiliateUrl  = 'http://rcm-na.amazon-adsystem.com/e/cm?t=blricenet-20&o=1&p=13&l=ez&f=ifr&f=ifr&linkID=PXWGEVS23BIYHTZM'
+  var template      = $state.current.name + '.html';
   var commonOptions = {
-    templateUrl: template, 
-    backdrop: 'static', 
-    controller: 'ModalInstanceCtlr', 
+    templateUrl: template,
+    backdrop: 'static',
+    controller: 'ModalInstanceCtlr',
     scope: $scope
   };
 
@@ -19,7 +20,13 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytic
       });
       break;
     case 'prepare':
-      $modal.open(commonOptions).result.then(function() {
+      var modal = $modal.open(commonOptions);
+
+      modal.rendered.then(function() {
+        $('#affiliate').css('height', 60).css('width', 468).attr('src', affiliateUrl);
+      });
+
+      modal.result.then(function() {
         Analytics.sendView('playing');
         $state.go('playing');
       });
@@ -35,10 +42,15 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytic
       }
 
       $scope.winning = $scope.winning || false;
+
       var customOptions = {controller: 'SummaryCtrl', templateUrl: 'summary.html'};
-      $modal.open(
-        $.extend({}, commonOptions, customOptions)
-      ).result.then(function() {
+      var modal         = $modal.open($.extend({}, commonOptions, customOptions));
+
+      modal.rendered.then(function() {
+        $('#affiliate').css('height', 60).css('width', 468).attr('src', affiliateUrl);
+      });
+
+      modal.result.then(function() {
         $state.go('prepare');
       }, function() {
         $state.go('welcome');

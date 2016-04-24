@@ -7,7 +7,8 @@
     "permissions": [
         "app.window",
         "storage",
-        "<all_urls>"
+        "<all_urls>",
+        "webview"
     ],
     "icons": {
         "16": "images/icon-16.png",
