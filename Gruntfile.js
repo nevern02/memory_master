@@ -4,11 +4,32 @@ module.exports = function(grunt) {
   var cdnjs = require('cdnjs-cdn-data');
   var merge = require('merge')
 
-  var cdnSources = {
-    underscore: {
-      versions: ['1.6.0'],
+  var extraCdnSources = {
+    angular: {
+      versions: ['1.5.5'],
       url: function (version) {
-        return '//cdnjs.cloudflare.com/ajax/libs/underscore.js/' + version + '/underscore-min.js';
+        return '//ajax.googleapis.com/ajax/libs/angularjs/' + version + '/angular.min.js';
+      }
+    },
+
+    'angular-animate': {
+      versions: ['1.5.5'],
+      url: function (version) {
+        return '//ajax.googleapis.com/ajax/libs/angularjs/' + version + '/angular-animate.min.js';
+      }
+    },
+
+    'angular-bootstrap': {
+      versions: ['1.3.2'],
+      url: function (version) {
+        return '//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/' + version + '/ui-bootstrap-tpls.min.js';
+      }
+    },
+
+    'angular-ui-router': {
+      versions: ['0.2.18'],
+      url: function (version) {
+        return '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/' + version + '/angular-ui-router.min.js';
       }
     },
 
@@ -19,15 +40,15 @@ module.exports = function(grunt) {
       }
     },
 
-    'angular-bootstrap': {
-      versions: ['0.11.2'],
+    underscore: {
+      versions: ['1.8.3'],
       url: function (version) {
-        return '//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/' + version + '/ui-bootstrap-tpls.min.js';
+        return '//cdnjs.cloudflare.com/ajax/libs/underscore.js/' + version + '/underscore-min.js';
       }
     }
   }
 
-  var cdnData = merge(google, cdnjs, cdnSources);
+  var cdnData = merge(google, cdnjs, extraCdnSources);
   var chromeScripts = ['app/scripts/chromereload.js', 'app/scripts/main.js'];
 
   var isGameScript = function(src) {
