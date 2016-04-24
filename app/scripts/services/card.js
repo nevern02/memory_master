@@ -1,10 +1,10 @@
 MemoryMaster.factory('Card', ['ImageList', function(ImageList) {
-  var PATTERNS = ['stairs', 'microbial', 'horizontal-stripes', 'rombes', 'arrows', 
-                  'zig-zag', 'weave', 'upholstery', 'stary', 'marrakesh', 'bokeh', 
-                  'carbon', 'vertical-stripes', 'carbon-fibre', 'hearts', 'argyle', 
-                  'steps', 'waves', 'cross', 'yin-yang', 'stars', 'brady-bunch', 'shippo', 
-                  'bricks', 'seigaiha', 'japanese-cube', 'polka-dot', 'houndstooth', 
-                  'checkerboard', 'diagonal-checkerboard', 'tartan', 'madras', 'lined-paper', 
+  var PATTERNS = ['stairs', 'microbial', 'horizontal-stripes', 'rombes', 'arrows',
+                  'zig-zag', 'weave', 'upholstery', 'stary', 'marrakesh', 'bokeh',
+                  'carbon', 'vertical-stripes', 'carbon-fibre', 'hearts', 'argyle',
+                  'steps', 'waves', 'cross', 'yin-yang', 'stars', 'brady-bunch', 'shippo',
+                  'bricks', 'seigaiha', 'japanese-cube', 'polka-dot', 'houndstooth',
+                  'checkerboard', 'diagonal-checkerboard', 'tartan', 'madras', 'lined-paper',
                   'blueprint-grid', 'tablecloth', 'diagonal-stripes', 'cicada-stripes'];
 
   var cardWidth = function(stage) {
