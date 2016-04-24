@@ -34,9 +34,16 @@ module.exports = function(grunt) {
     },
 
     bootstrap: {
-      versions: ['3.2.0'],
+      versions: ['3.3.6'],
       url: function (version) {
         return '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + version + '/js/bootstrap.min.js';
+      }
+    },
+
+    jquery: {
+      versions: ['2.2.2'],
+      url: function (version) {
+        return '//ajax.googleapis.com/ajax/libs/jquery/' + version + '/jquery.min.js';
       }
     },
 
@@ -75,14 +82,21 @@ module.exports = function(grunt) {
             src: [
               'bower_components/**/*.min.{js,css}',
               'bower_components/**/{normalize,underscore}.{css,js}',
-              'bower_components/font-awesome/fonts/*',
-              'bower_components/**/angular-animate.js' // minified version is broken in 1.2.28
+              'bower_components/font-awesome/fonts/*'
             ],
-            dest: 'dist/chrome'},
+            dest: 'dist/chrome'
+          },
           {
             expand: true,
             cwd: 'app/',
-            src: ['manifest.json', 'scripts/main.js', '*.html', 'images/**', 'styles/**'],
+            src: [
+              'manifest.json',
+              'scripts/main.js',
+              '*.html',
+              'images/**',
+              'styles/**',
+              'scripts/google-analytics-bundle.js'
+            ],
             dest: 'dist/chrome'
           }
         ]
@@ -137,11 +151,11 @@ module.exports = function(grunt) {
                 var cdn = null;
 
                 if (p1.match(/font-awesome/)) {
-                  cdn = '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css';
+                  cdn = '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css';
                 } else if (p1.match(/normalize/)) {
-                  cdn = '//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css';
+                  cdn = '//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css';
                 } else if (p1.match(/bootstrap/)) {
-                  cdn = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css'
+                  cdn = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css'
                 }
 
                 if (cdn) {
@@ -164,7 +178,7 @@ module.exports = function(grunt) {
             {
               match: /("bower_components.+\/)(.+)\.(css|js)"/g,
               replacement: function(match, p1, p2, p3) {
-                if (p2.match(/(normalize|underscore|angular-animate)/)) {
+                if (p2.match(/(normalize|underscore)/)) {
                   return match;
                 } else {
                   return p1 + p2 + '.min.' + p3 + '"';
