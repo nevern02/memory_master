@@ -146,7 +146,7 @@ module.exports = function(grunt) {
         options: {
           patterns: [
             {
-              match: /.*google-chrome.*/g,
+              match: /.*replace-chrome.*/g,
               replacement: ''
             }
           ]
