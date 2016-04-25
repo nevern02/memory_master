@@ -74,6 +74,12 @@ module.exports = function(grunt) {
         ]
       },
 
+      facebook: {
+        files: [
+          {expand: true, cwd: 'app/', src: ['*.html', 'images/**', 'styles/**'], dest: 'dist/facebook'}
+        ]
+      },
+
       chrome: {
         files: [
           {
@@ -108,7 +114,7 @@ module.exports = function(grunt) {
         cdn: cdnData
       },
       dist: {
-        html: ['dist/web/play/index.html']
+        html: ['dist/web/play/index.html', 'dist/facebook/index.html']
       }
     }, // cdnify
 
@@ -124,6 +130,7 @@ module.exports = function(grunt) {
         },
         files: [
           {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'},
+          {src: 'dist/facebook/index.html', dest: 'dist/facebook/index.html'},
         ]
       }, // replace:analytics
 
@@ -184,7 +191,8 @@ module.exports = function(grunt) {
           ]
         },
         files: [
-          {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'}
+          {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'},
+          {src: 'dist/facebook/index.html', dest: 'dist/facebook/index.html'}
         ]
       }, // replace:css
 
@@ -225,6 +233,7 @@ module.exports = function(grunt) {
         },
         files: [
           {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'},
+          {src: 'dist/facebook/index.html', dest: 'dist/facebook/index.html'},
           {src: 'dist/chrome/index.html', dest: 'dist/chrome/index.html'}
         ]
       } // replace:scripts
@@ -237,6 +246,11 @@ module.exports = function(grunt) {
       web: {
         files: [
           {src: ['app/scripts/memorymaster.js', 'app/scripts/**/*.js'], dest: 'dist/web/play/game.js', filter: isGameScript}
+        ]
+      },
+      facebook: {
+        files: [
+          {src: ['app/scripts/memorymaster.js', 'app/scripts/**/*.js'], dest: 'dist/facebook/game.js', filter: isGameScript}
         ]
       },
       chrome: {
@@ -270,8 +284,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-zip');
 
   grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:analytics', 'replace:css', 'replace:affiliate', 'replace:scripts', 'uglify:web', 'sitemap']);
+  grunt.registerTask('build:facebook', ['copy:facebook', 'cdnify', 'replace:analytics', 'replace:css', 'replace:scripts', 'uglify:facebook']);
   grunt.registerTask('build:chrome', ['copy:chrome', 'replace:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome', 'zip:chrome']);
-  grunt.registerTask('build', ['build:web', 'build:chrome']);
+  grunt.registerTask('build', ['build:web', 'build:chrome', 'build:facebook']);
 
   grunt.registerTask('default', ['build']);
 };
