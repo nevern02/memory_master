@@ -129,6 +129,21 @@ module.exports = function(grunt) {
         ]
       }, // replace:web
 
+      affiliate: {
+        options: {
+          patterns: [
+            {
+              match: /.*replace-affiliate.*/g,
+              replacement: ''
+            }
+          ]
+        },
+        files: [
+          {src: 'dist/web/play/prepare.html', dest: 'dist/web/play/prepare.html'},
+          {src: 'dist/web/play/summary.html', dest: 'dist/web/play/summary.html'},
+        ]
+      }, // replace:affiliate
+
       chrome: {
         options: {
           patterns: [
@@ -256,7 +271,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sitemap');
   grunt.loadNpmTasks('grunt-zip');
 
-  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:web', 'replace:css', 'replace:scripts', 'uglify:web', 'sitemap']);
+  grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:web', 'replace:css', 'replace:affiliate', 'replace:scripts', 'uglify:web', 'sitemap']);
   grunt.registerTask('build:chrome', ['copy:chrome', 'replace:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome', 'zip:chrome']);
   grunt.registerTask('build', ['build:web', 'build:chrome']);
 
