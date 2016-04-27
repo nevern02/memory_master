@@ -273,7 +273,23 @@ module.exports = function(grunt) {
         src: ['dist/chrome/**', '!dist/chrome/*.zip'],
         dest: 'dist/chrome/memorymaster.zip'
       }
-    }
+    }, // zip
+
+    rsync: {
+      options: {
+        args: ['--verbose'],
+        exclude: ['.git*', 'node_modules'],
+        recursive: true
+      },
+      deploy: {
+        options: {
+          src: 'dist/facebook/',
+          dest: '/var/www/memory_master',
+          host: 'deploy@davos.blrice.net',
+          delete: true
+        }
+      }
+    } // rsync
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -282,6 +298,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-sitemap');
   grunt.loadNpmTasks('grunt-zip');
+  grunt.loadNpmTasks('grunt-rsync');
 
   grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:analytics', 'replace:css', 'replace:affiliate', 'replace:scripts', 'uglify:web', 'sitemap']);
   grunt.registerTask('build:facebook', ['copy:facebook', 'cdnify', 'replace:analytics', 'replace:css', 'replace:scripts', 'uglify:facebook']);
