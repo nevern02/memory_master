@@ -165,6 +165,23 @@ module.exports = function(grunt) {
         ]
       }, // replace:chrome
 
+      facebook: {
+        options: {
+          patterns: [
+            {
+              match: /.*replace-facebook.*/g,
+              replacement: ''
+            }
+          ]
+        },
+        files: [
+          {src: 'dist/web/play/index.html', dest: 'dist/web/play/index.html'},
+          {src: 'dist/web/play/welcome.html', dest: 'dist/web/play/welcome.html'},
+          {src: 'dist/facebook/index.html', dest: 'dist/facebook/index.html'},
+          {src: 'dist/facebook/welcome.html', dest: 'dist/facebook/welcome.html'},
+        ]
+      }, // replace:facebook
+
       css: {
         options: {
           patterns: [
@@ -301,8 +318,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-rsync');
 
   grunt.registerTask('build:web', ['copy:web', 'cdnify', 'replace:analytics', 'replace:css', 'replace:affiliate', 'replace:scripts', 'uglify:web', 'sitemap']);
-  grunt.registerTask('build:facebook', ['copy:facebook', 'cdnify', 'replace:analytics', 'replace:css', 'replace:scripts', 'uglify:facebook']);
-  grunt.registerTask('build:chrome', ['copy:chrome', 'replace:chrome', 'replace:scripts', 'replace:bower', 'uglify:chrome', 'zip:chrome']);
+  grunt.registerTask('build:facebook', ['copy:facebook', 'cdnify', 'replace:analytics', 'replace:css', 'replace:scripts', 'replace:facebook', 'uglify:facebook']);
+  grunt.registerTask('build:chrome', ['copy:chrome', 'replace:chrome', 'replace:scripts', 'replace:bower', 'replace:facebook', 'uglify:chrome', 'zip:chrome']);
   grunt.registerTask('build', ['build:web', 'build:chrome', 'build:facebook']);
 
   grunt.registerTask('default', ['build']);
