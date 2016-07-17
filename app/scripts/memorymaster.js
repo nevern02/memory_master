@@ -12,7 +12,9 @@ MemoryMaster.config(['$stateProvider', '$urlRouterProvider', function($stateProv
     controller: 'ModalCtrl'
   }).state('gameOver', {
     controller: 'ModalCtrl'
-  });;
+  }).state('highscores', {
+    controller: 'ModalCtrl'
+  });
 }]);
 
 $('body').onload = $('#loading').hide();

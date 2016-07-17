@@ -15,8 +15,12 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytic
       var customOptions = {size: 'lg'};
       $modal.open(
         $.extend({}, customOptions, commonOptions)
-      ).result.then(function() {
-        $state.go('prepare');
+      ).result.then(function(details) {
+        if (details.next === 'highscores') {
+          $state.go('highscores')
+        } else {
+          $state.go('prepare');
+        }
       });
       break;
     case 'prepare':
@@ -53,6 +57,16 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytic
       modal.result.then(function() {
         $state.go('prepare');
       }, function() {
+        $state.go('welcome');
+      });
+      break;
+    case 'highscores':
+      var customOptions = {controller: 'HighScoresCtrl'};
+      var modal         = $modal.open($.extend({}, commonOptions, customOptions));
+
+      Analytics.sendView('highscores');
+
+      modal.result.then(function() {
         $state.go('welcome');
       });
       break;

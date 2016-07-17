@@ -1,8 +1,8 @@
 MemoryMaster.controller('ModalInstanceCtlr', ['$scope', '$uibModalInstance', 'Analytics', function($scope, $modalInstance, Analytics) {
   $scope.allowTracking = Analytics.isEnabled();
 
-  $scope.close = function() {
-    $modalInstance.close();
+  $scope.close = function(nextState) {
+    $modalInstance.close({next: nextState});
   }
 
   $scope.dismiss = function() {

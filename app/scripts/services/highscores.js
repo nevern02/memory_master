@@ -1,7 +1,9 @@
 'use strict';
 
-MemoryMaster.service('HighScores', function() {
-  var highScore = 0;
+MemoryMaster.service('HighScores', ['$http', '$q', function($http, $q) {
+  var highScore       = 0;
+  var deferred        = $q.defer();
+  var scoresUrl       = 'https://memory.blrice.net/scores';
   var isChromeEnabled = typeof(chrome) !== 'undefined' && chrome.storage
 
   if (isChromeEnabled) {
@@ -17,8 +19,16 @@ MemoryMaster.service('HighScores', function() {
     }
   }
 
+  $http.get(scoresUrl).then(function(response) {
+    deferred.resolve(response.data);
+  });
+
   this.current = function() {
     return highScore;
+  }
+
+  this.getScores = function() {
+    return deferred.promise;
   }
 
   this.save = function(score) {
@@ -29,4 +39,4 @@ MemoryMaster.service('HighScores', function() {
       document.cookie = 'highScore=' + highScore;
     }
   }
-});
+}]);
