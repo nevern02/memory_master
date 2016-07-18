@@ -2,8 +2,7 @@
 
 MemoryMaster.service('HighScores', ['$http', '$q', function($http, $q) {
   var personalBest    = 0;
-  var deferred        = $q.defer();
-  var scoresUrl       = 'https://memory.blrice.net/scores';
+  var urlRoot         = 'https://memory.blrice.net';
   var isChromeEnabled = typeof(chrome) !== 'undefined' && chrome.storage
 
   if (isChromeEnabled) {
@@ -19,15 +18,17 @@ MemoryMaster.service('HighScores', ['$http', '$q', function($http, $q) {
     }
   }
 
-  $http.get(scoresUrl).then(function(response) {
-    deferred.resolve(response.data);
-  });
-
   this.getPersonalBest = function() {
     return personalBest;
   }
 
-  this.getScores = function() {
+  this.getRank = function(score) {
+    var deferred = $q.defer();
+
+    $http.get(urlRoot + '/rank', {'score': score}).then(function(response) {
+      deferred.resolve(response.data);
+    });
+
     return deferred.promise;
   }
 
