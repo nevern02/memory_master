@@ -6,7 +6,7 @@ MemoryMaster.controller('SummaryCtrl', ['$scope', '$uibModalInstance', 'Score', 
   $scope.personalBest    = HighScores.getPersonalBest();
   $scope.newPersonalBest = false;
 
-  if ($scope.score >= $scope.personalBest) {
+  if ($scope.score > $scope.personalBest) {
     $scope.newPersonalBest = true;
     HighScores.setPersonalBest($scope.score);
   }

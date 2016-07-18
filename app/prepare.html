@@ -23,6 +23,15 @@
 		</div>
 	</div>
 </div>
+<div class="modal-body" ng-if="personalBest">
+  <dl>
+    <dt>Personal Best Score</dt>
+    <dd>{{personalBest}}</dd>
+
+    <dt>Global Rank</dt>
+    <dd>{{ranking.rank}} (Top {{ranking.rank / ranking.total}}%)</dd>
+  </dl>
+</div>
 <div class="modal-footer">
   <div class="text-center">
     <button type="button" class="btn btn-primary btn-lg" ng-click="close()">Begin</button>

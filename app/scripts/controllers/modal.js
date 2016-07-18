@@ -1,4 +1,4 @@
-MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytics', function($scope, $state, $modal, Analytics) {
+MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytics', 'HighScores', function($scope, $state, $modal, Analytics, HighScores) {
   var affiliateUrl  = 'http://rcm-na.amazon-adsystem.com/e/cm?t=blricenet-20&o=1&p=13&l=ez&f=ifr&f=ifr&linkID=PXWGEVS23BIYHTZM'
   var template      = $state.current.name + '.html';
   var commonOptions = {
@@ -20,6 +20,14 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytic
       });
       break;
     case 'prepare':
+      if (HighScores.getPersonalBest()) {
+        $scope.personalBest = HighScores.getPersonalBest();
+
+        HighScores.getRank().then(function(data) {
+          $scope.ranking = data;
+        });
+      }
+
       var modal = $modal.open(commonOptions);
 
       modal.rendered.then(function() {

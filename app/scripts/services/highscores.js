@@ -23,9 +23,15 @@ MemoryMaster.service('HighScores', ['$http', '$q', function($http, $q) {
   }
 
   this.getRank = function(score) {
-    var deferred = $q.defer();
+    var deferred     = $q.defer();
+    var url          = urlRoot + '/rank';
+    var personalBest = this.getPersonalBest();
 
-    $http.get(urlRoot + '/rank', {'score': score}).then(function(response) {
+    if (personalBest > 0) {
+      url += '?score=' + personalBest;
+    }
+
+    $http.get(url).then(function(response) {
       deferred.resolve(response.data);
     });
 
