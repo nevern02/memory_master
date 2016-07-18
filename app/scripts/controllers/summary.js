@@ -1,14 +1,14 @@
 'use strict';
 
 MemoryMaster.controller('SummaryCtrl', ['$scope', '$uibModalInstance', 'Score', 'HighScores', 'Timer', function($scope, $modalInstance, Score, HighScores, Timer) {
-  $scope.score = Score.getScore();
-  $scope.remainingTime = Timer.remaining();
-  $scope.highScore = HighScores.current();
-  $scope.newHighScore = false;
+  $scope.score           = Score.getScore();
+  $scope.remainingTime   = Timer.remaining();
+  $scope.personalBest    = HighScores.getPersonalBest();
+  $scope.newPersonalBest = false;
 
-  if ($scope.score > $scope.highScore) {
-    $scope.newHighScore = true;
-    HighScores.save($scope.score);
+  if ($scope.score >= $scope.personalBest) {
+    $scope.newPersonalBest = true;
+    HighScores.setPersonalBest($scope.score);
   }
 
   $scope.close = function() {
