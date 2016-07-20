@@ -1,7 +1,7 @@
 'use strict';
 
 MemoryMaster.service('Timer', ['$interval', '$q', function($interval, $q) {
-  var startingSeconds = 300;
+  var startingSeconds = 30;
   var currentSeconds = startingSeconds;
   var promise = null;
   var deferred = null;

@@ -11,6 +11,10 @@ MemoryMaster.controller('SummaryCtrl', ['$scope', '$uibModalInstance', 'Score', 
     HighScores.setPersonalBest($scope.score);
   }
 
+  HighScores.getRank().then(function(data) {
+    $scope.ranking = data;
+  });
+
   $scope.close = function() {
     $modalInstance.close();
   }

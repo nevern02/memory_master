@@ -24,6 +24,15 @@
 <div class="modal-body fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true"></div>
 replace-facebook -->
 <div class="modal-footer">
+  <div ng-if="personalBest">
+    <dl>
+      <dt>Personal Best Score</dt>
+      <dd>{{personalBest}}</dd>
+
+      <dt>Global Rank</dt>
+      <dd>{{ranking.rank}} (Top {{ranking.rank / ranking.total}}%)</dd>
+    </dl>
+  </div>
   <form class="form-inline">
     <div class="checkbox" ng-show="!isBrowser">
       <label>
@@ -31,6 +40,5 @@ replace-facebook -->
       </label>
     </div>
     <button type="button" class="btn btn-primary btn-lg" ng-click="close()">Start Playing!</button>
-    <button type="button" class="btn btn-primary btn-lg" ng-click="close('highscores')">View Leaderboard</button>
   </form>
 </div>

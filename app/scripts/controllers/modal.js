@@ -12,14 +12,6 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytic
     case 'welcome':
       Analytics.sendView('welcome');
 
-      var customOptions = {size: 'lg'};
-      $modal.open(
-        $.extend({}, customOptions, commonOptions)
-      ).result.then(function(details) {
-          $state.go('prepare');
-      });
-      break;
-    case 'prepare':
       if (HighScores.getPersonalBest()) {
         $scope.personalBest = HighScores.getPersonalBest();
 
@@ -28,6 +20,14 @@ MemoryMaster.controller('ModalCtrl', ['$scope', '$state', '$uibModal', 'Analytic
         });
       }
 
+      var customOptions = {size: 'lg'};
+      $modal.open(
+        $.extend({}, customOptions, commonOptions)
+      ).result.then(function(details) {
+          $state.go('prepare');
+      });
+      break;
+    case 'prepare':
       var modal = $modal.open(commonOptions);
 
       modal.rendered.then(function() {
