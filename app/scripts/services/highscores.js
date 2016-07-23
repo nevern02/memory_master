@@ -46,5 +46,9 @@ MemoryMaster.service('HighScores', ['$http', '$q', function($http, $q) {
     } else {
       document.cookie = 'highScore=' + score;
     }
+
+    var url = urlRoot + '/scores';
+
+    $http.post(url, {'score': personalBest, 'time': Date.now()});
   }
 }]);
