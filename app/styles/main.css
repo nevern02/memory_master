@@ -10,6 +10,14 @@ ul {
   display: none;
 }
 
+#highscore {
+  margin: 0em;
+}
+
+#highscore dl {
+  margin: 0em;
+}
+
 #highscore dd {
   padding-bottom: 0.25em;
 }
@@ -110,6 +118,20 @@ ul {
   top: 30%;
   transition:all linear 1.5s;
   -webkit-transition:all linear 1.5s;
+}
+
+.fb-login-button {
+  padding-bottom: 0.25em;
+  padding-left: 1em;
+}
+
+.force-absolute {
+  position: absolute !important;
+}
+
+.menu {
+  padding-top: 0em;
+  padding-bottom: 0em;
 }
 
 .menu img {
