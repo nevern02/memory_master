@@ -19,8 +19,21 @@
       <img src="images/memorymaster3.png" />
     </div>
   </div>
+</div>
+<!-- replace-facebook
+<div ng-class="{'force-absolute': personalBest}" class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true" data-scope="email,public_profile"></div>
+replace-facebook -->
+<div id="highscore" class="text-center h4" ng-if="personalBest">
+  <dl>
+    <dt>Personal Best Score</dt>
+    <dd>{{personalBest}}</dd>
+
+    <dt>Global Rank</dt>
+    <dd>{{ranking.rank}} (Top {{(ranking.rank / ranking.total).toFixed(1)}}%)</dd>
+  </dl>
+</div>
 <div class="modal-footer">
-  <form class="form-inline">
+  <form class="form-inline text-center">
     <div class="checkbox" ng-show="!isBrowser">
       <label>
         <input type="checkbox" ng-model="allowTracking"> Allow anonymous usage statistics
