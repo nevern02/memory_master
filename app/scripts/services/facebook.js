@@ -1,8 +1,9 @@
 'use strict';
 
-MemoryMaster.service('Facebook', function($http) {
-  var authResponse = {};
-  var user         = {};
+MemoryMaster.service('Facebook', ['$window', function($window) {
+  var authResponse    = {};
+  var user            = {};
+
   var initOptions = {
     appId      : '1664248503832367',
     xfbml      : true,
@@ -38,4 +39,4 @@ MemoryMaster.service('Facebook', function($http) {
 
   this.getUserId = function() { return authResponse.userID };
   this.getEmail  = function() { return user.email };
-});
+}]);

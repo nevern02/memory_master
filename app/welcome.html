@@ -29,7 +29,7 @@ replace-facebook -->
     <dd>{{personalBest}}</dd>
 
     <dt>Global Rank</dt>
-    <dd>{{ranking.rank}} (Top {{(ranking.rank / ranking.total).toFixed(1)}}%)</dd>
+    <dd>{{ranking.rank}} ({{(ranking.rank / ranking.total) | rankPercentage}})</dd>
   </dl>
 </div>
 <div class="modal-footer">
