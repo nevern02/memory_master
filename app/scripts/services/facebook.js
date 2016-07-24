@@ -16,7 +16,7 @@ MemoryMaster.service('Facebook', function($http) {
       fields: 'email,name'
     };
 
-    FB.api('/me', { options }, function(response) {
+    FB.api('/me', options, function(response) {
       user = response;
     });
   }
