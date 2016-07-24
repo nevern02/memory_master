@@ -11,7 +11,12 @@ MemoryMaster.service('Facebook', function($http) {
   };
 
   var getUser = function() {
-    FB.api('/me', { fields: 'email,name' }, function(response) {
+    var options = {
+      access_token: authResponse.accessToken,
+      fields: 'email,name'
+    };
+
+    FB.api('/me', { options }, function(response) {
       user = response;
     });
   }
@@ -27,9 +32,8 @@ MemoryMaster.service('Facebook', function($http) {
 
     FB.Event.subscribe('auth.authResponseChange', function(event) {
       authResponse = event.authResponse;
+      getUser();
     });
-
-    getUser();
   }
 
   this.getUserId = function() { return authResponse.userID };
