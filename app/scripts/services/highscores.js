@@ -38,7 +38,7 @@ MemoryMaster.service('HighScores', ['$http', '$q', function($http, $q) {
     return deferred.promise;
   }
 
-  this.setPersonalBest = function(score) {
+  this.setPersonalBest = function(name, score) {
     personalBest = score;
 
     if (isChromeEnabled) {
@@ -49,6 +49,6 @@ MemoryMaster.service('HighScores', ['$http', '$q', function($http, $q) {
 
     var url = urlRoot + '/scores';
 
-    $http.post(url, {'score': personalBest, 'time': Date.now()});
+    $http.post(url, {'score': personalBest, 'time': Date.now(), 'name': name});
   }
 }]);

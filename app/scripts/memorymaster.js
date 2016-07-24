@@ -15,4 +15,18 @@ MemoryMaster.config(['$stateProvider', '$urlRouterProvider', function($stateProv
   });
 }]);
 
-$('body').onload = $('#loading').hide();
+MemoryMaster.run(['$window', 'Facebook', function($window, Facebook) {
+  $window.fbAsyncInit = function() {
+    Facebook.initialize();
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  $('body').onload = $('#loading').hide();
+}]);

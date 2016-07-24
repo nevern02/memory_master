@@ -92,6 +92,7 @@
       <script src="scripts/services/timer.js"></script>
       <script src="scripts/services/alert.js"></script>
       <script src="scripts/services/analytics.js"></script>
+      <script src="scripts/services/facebook.js"></script>
       <script src="scripts/filters/elapsedtime.js"></script>
       <script src="scripts/controllers/game.js"></script>
       <script src="scripts/controllers/background.js"></script>
@@ -102,31 +103,5 @@
       <script src="scripts/controllers/playing.js"></script>
       <script src="scripts/controllers/summary.js"></script>
       <script src="scripts/controllers/modalinstance.js"></script>
-
-      <!-- replace-facebook
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '1664248503832367',
-            xfbml      : true,
-            version    : 'v2.5'
-          });
-
-          FB.Canvas.getPageInfo(
-            function(info) {
-              FB.Canvas.setSize({width: info.clientWidth, height: info.clientHeight});
-            }
-          );
-        };
-
-        (function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "//connect.facebook.net/en_US/sdk.js";
-           fjs.parentNode.insertBefore(js, fjs);
-         }(document, 'script', 'facebook-jssdk'));
-      </script>
-      replace-facebook -->
     </body>
 </html>

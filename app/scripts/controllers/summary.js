@@ -1,6 +1,6 @@
 'use strict';
 
-MemoryMaster.controller('SummaryCtrl', ['$scope', '$uibModalInstance', 'Score', 'HighScores', 'Timer', function($scope, $modalInstance, Score, HighScores, Timer) {
+MemoryMaster.controller('SummaryCtrl', ['$scope', '$uibModalInstance', 'Score', 'HighScores', 'Timer', 'Facebook', function($scope, $modalInstance, Score, HighScores, Timer, Facebook) {
   $scope.score           = Score.getScore();
   $scope.remainingTime   = Timer.remaining();
   $scope.personalBest    = HighScores.getPersonalBest();
@@ -8,7 +8,7 @@ MemoryMaster.controller('SummaryCtrl', ['$scope', '$uibModalInstance', 'Score', 
 
   if ($scope.score > $scope.personalBest) {
     $scope.newPersonalBest = true;
-    HighScores.setPersonalBest($scope.score);
+    HighScores.setPersonalBest(Facebook.getEmail(), $scope.score);
   }
 
   HighScores.getRank().then(function(data) {
