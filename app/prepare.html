@@ -2,30 +2,54 @@
   <div class="row">
     <h1 class="text-center">Stage {{stage}}</h1>
   </div>
-	<div class="text-center">
-		<div class="alignleft">
-			<!-- replace-affiliate
-			<iframe src="http://rcm-na.amazon-adsystem.com/e/cm?t=blricenet-20&o=1&p=13&l=ez&f=ifr&f=ifr&linkID=PXWGEVS23BIYHTZM"
-							width="468"
-							height="60"
-							scrolling="no"
-							marginwidth="0"
-							marginheight="0"
-							border="0"
-							frameborder="0"
-							style="border:none;max-width:800px;max-height:600px;">
-			</iframe>
-			replace-affiliate -->
+  <div class="text-center">
+    <div class="alignleft">
+      <!-- replace-affiliate
+        <iframe src="http://rcm-na.amazon-adsystem.com/e/cm?t=blricenet-20&o=1&p=13&l=ez&f=ifr&f=ifr&linkID=PXWGEVS23BIYHTZM"
+        width="468"
+        height="60"
+        scrolling="no"
+        marginwidth="0"
+        marginheight="0"
+        border="0"
+        frameborder="0"
+        style="border:none;max-width:800px;max-height:600px;">
+        </iframe>
+        replace-affiliate -->
 
-			<!-- replace-chrome
-      <webview id="affiliate"></webview>
-			replace-chrome -->
-		</div>
-	</div>
-</div>
-  <div class="modal-footer">
-    <form class="form-inline text-center">
-      <button type="button" class="btn btn-primary btn-lg" ng-click="close()">Begin</button>
-    </form>
+        <!-- replace-chrome
+          <webview id="affiliate"></webview>
+          replace-chrome -->
+    </div>
   </div>
+</div>
+<div class="modal-body text-center">
+  <h3>Available Powers</h3>
+  <div class="row">
+    <ul id="powers">
+      <li class="col-md-4">
+        <p>Multiplier +1</p>
+        <span class="fa fa-4x fa-times power"></span>
+        <span class="fa fa-money"></span> x 50
+      </li>
+      <li class="col-md-4">
+        <p>No Time Penalties</p>
+        <span class="fa fa-4x fa-star power"></span>
+        <span class="fa fa-money"></span> x 100
+      </li>
+      <li class="col-md-4">
+        <p>Bonus Streak Time</p>
+        <span class="fa fa-4x fa-clock-o power"></span>
+        <span class="fa fa-money"></span> x 200
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <p><a href="#">Add Funds</a></p>
+  </div>
+</div>
+<div class="modal-footer">
+  <form class="form-inline text-center">
+    <button type="button" class="btn btn-primary btn-lg" ng-click="close()">Begin</button>
+  </form>
 </div>
