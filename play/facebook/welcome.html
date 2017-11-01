@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <h1 class="modal-title">Memory Master</h1>
+</div>
+<div class="menu modal-body">
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Match Cards</h3>
+      <p>Find the matching pairs of cards before time runs out.</p>
+      <img src="images/memorymaster1.png" />
+    </div>
+    <div class="col-md-4">
+      <h3>Gain Multipliers</h3>
+      <p>Earn bonus time and points for matching streaks.</p>
+      <img src="images/memorymaster2.png" />
+    </div>
+    <div class="col-md-4">
+      <h3>Advance</h3>
+      <p>Matches in later stages are worth more points.</p>
+      <img src="images/memorymaster3.png" />
+    </div>
+  </div>
+</div>
+
+<div ng-class="{'force-absolute': personalBest}" class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true" data-scope="email,public_profile"></div>
+
+<div id="highscore" class="text-center h4" ng-if="personalBest">
+  <dl>
+    <dt>Personal Best Score</dt>
+    <dd>{{personalBest}}</dd>
+
+    <dt>Global Rank</dt>
+    <dd>{{ranking.rank}} ({{(ranking.rank / ranking.total) | rankPercentage}})</dd>
+  </dl>
+</div>
+<div class="modal-footer">
+  <form class="form-inline text-center">
+    <div class="checkbox" ng-show="!isBrowser">
+      <label>
+        <input type="checkbox" ng-model="allowTracking"> Allow anonymous usage statistics
+      </label>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg" ng-click="close()">Start Playing!</button>
+  </form>
+</div>
